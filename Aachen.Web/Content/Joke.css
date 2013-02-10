@@ -1,0 +1,18 @@
+﻿.jokeText 
+{
+	border: 1px solid #c7d1d6;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+.jokeDate{
+	color: grey;
+	text-align: right;
+}
+
+.jokeDate a{
+	text-decoration: none;
+	color: grey;
+}
+

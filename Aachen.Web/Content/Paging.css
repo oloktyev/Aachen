@@ -1,0 +1,26 @@
+﻿.paging {
+	text-align: center;
+	margin: 10px 0;
+}
+
+.paging a{
+	text-decoration: none;
+}
+
+.selectedPage {
+	
+	padding: 0 5px;
+	border: 1px solid #c7d1d6;
+}
+
+.pageNumber {
+    
+}
+
+.paging .leftArrow{
+	margin-left: 10px;
+}
+
+.paging .rightArrow{
+	margin-right: 10px;
+}
