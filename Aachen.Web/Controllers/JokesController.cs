@@ -7,7 +7,6 @@ using Aachen.Core.EF;
 using Aachen.Core.Interfaces;
 using Aachen.Core.Interfaces.Services;
 using Aachen.Infrastructure.Services;
-using Aachen.Web.ViewModels;
 
 namespace Aachen.Web.Controllers
 {
@@ -30,30 +29,18 @@ namespace Aachen.Web.Controllers
 
         public ActionResult Jokes(string pageNumber)
         {
-            int page;
-            const int pageSize = 10;
-            int jokeCount = _uow.Jokes.GetAll().Count();
+            return View("Index");
+        }
 
-            bool isValidPage = int.TryParse(pageNumber, out page) 
-                                    && page > 0 
-                                    && jokeCount > page * pageSize;
-            int selectedPage = isValidPage ? page : 1;
-
-            var jokes = _jokesService.GetJokesForPage(selectedPage, pageSize);
-            var model = new JokesViewModel
-                            {
-                                Jokes = jokes.Select(x => new JokeViewModel
-                                                        { 
-                                                            Description = x.Description,
-                                                            CreatedDate = x.CreatedDate,
-                                                            WebResourceUrl = x.Resource.Name
-                                                        })
-                                         .ToList(),
-                                PageCount = jokeCount % pageSize != 0 ? jokeCount / pageSize : jokeCount / pageSize + 1,
-                                SelectedPage = selectedPage
-                            };
-            return View(model);
-
+        public ActionResult GetRecent(int first, int count)
+        {
+            var jokes = _jokesService.GetRecent(first, count)
+                .Select(x => new {
+                                    Description = x.Description,
+                                    Resource = x.Resource
+                                 })
+                .ToList();
+            return Json(jokes, JsonRequestBehavior.AllowGet);
         }
     }
 }

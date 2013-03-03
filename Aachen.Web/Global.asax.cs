@@ -33,9 +33,8 @@ namespace Aachen.Web
 
             routes.MapRoute(
                 name: "Jokes",
-                url: "Jokes/{pageNumber}",
-                defaults: new { controller = "Jokes", action = "Jokes" }
-                //constraints: new { pageNumber = @"\d+" }
+                url: "Jokes/{action}",
+                defaults: new { controller = "Jokes" }
             );
 
             routes.MapRoute(

@@ -40,6 +40,17 @@ namespace Aachen.Infrastructure.Services
                 .Take(pageSize);
         }
 
+        public IQueryable<Joke> GetRecent(int first, int count)
+        {
+            if (first < 0 || count <= 0)
+                return Enumerable.Empty<Joke>().AsQueryable();
+
+            return _uow.Jokes.GetAll()
+                .OrderByDescending(x => x.CreatedDate)
+                .Skip(first)
+                .Take(count);
+        }
+
         public IList<Joke> AddNewJokes()
         {
             var newJokes = new List<Joke>();

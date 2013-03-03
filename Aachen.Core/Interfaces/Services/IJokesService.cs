@@ -12,6 +12,8 @@ namespace Aachen.Core.Interfaces.Services
 
         IQueryable<Joke> GetJokesForPage(int pageNumber, int pageSize);
 
+        IQueryable<Joke> GetRecent(int first, int count);
+
         IList<Joke> AddNewJokes();
     }
 }

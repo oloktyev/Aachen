@@ -1,0 +1,32 @@
+﻿body {
+    background-color: #f5f5f5;
+    background-image: url('http://cdn.jojari.com/images/jojari/body-speckle.gif');
+}
+
+.container {
+    /*background-color: white;*/
+}
+
+.aachen-content {
+    margin: 90px 30px 0 30px;
+}
+
+.jokes-top-menu {
+    margin-top: 80px;
+}
+
+.aachen-joke {
+    padding: 14px 20px 17px 20px;
+    border: 1px solid #dedede;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 3px #dedede;
+    -moz-box-shadow: 0 0 3px #dedede;
+    box-shadow: 0 0 5px #dedede;
+    border: 1px solid #dedede;
+    background-color: white;
+
+
+
+}
