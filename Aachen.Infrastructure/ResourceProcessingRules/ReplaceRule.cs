@@ -11,12 +11,7 @@ namespace Aachen.Infrastructure.ResourceProcessingRules
         public string Apply(string item, string argument)
         {
             var args = argument.Split(';');
-            item = item.Replace(args[0], args[1]);
-            while (item.IndexOf(@"<br><br>", System.StringComparison.Ordinal) >= 0)
-                item = item.Replace(@"<br><br>", @"<br>");
-            while (item.IndexOf(@"<br> <br>", System.StringComparison.Ordinal) >= 0)
-                item = item.Replace(@"<br> <br>", @"<br>");
-            return item;
+            return item.Replace(args[0], args[1]);
         }
     }
 }
