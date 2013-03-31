@@ -50,8 +50,13 @@
     <Compile Include="EF\EfUnitOfWork.cs" />
     <Compile Include="EF\GenericRepository.cs" />
     <Compile Include="Parsers\FeedParserBase.cs" />
+    <Compile Include="Parsers\ParserHelper.cs" />
     <Compile Include="Parsers\RssParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceProcessingRules\ReplaceRule.cs" />
+    <Compile Include="ResourceProcessingRules\IResourceProcessingRules.cs" />
+    <Compile Include="ResourceProcessingRules\RemoveFromRule.cs" />
+    <Compile Include="ResourceProcessingRules\RuleCreator.cs" />
     <Compile Include="Services\JokesService.cs" />
   </ItemGroup>
   <ItemGroup>

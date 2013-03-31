@@ -26,7 +26,8 @@
     box-shadow: 0 0 5px #dedede;
     border: 1px solid #dedede;
     background-color: white;
+}
 
-
-
+.aachen-joke:nth-child(odd) {
+     clear: left;
 }

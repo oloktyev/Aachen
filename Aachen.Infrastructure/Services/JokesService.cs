@@ -9,6 +9,8 @@ using Aachen.Core.Interfaces;
 using Aachen.Core.Interfaces.Services;
 using Aachen.Core.Model;
 using Aachen.Infrastructure.Parsers;
+using Aachen.Core.DTO;
+using Aachen.Infrastructure.ResourceProcessingRules;
 
 namespace Aachen.Infrastructure.Services
 {
@@ -54,60 +56,65 @@ namespace Aachen.Infrastructure.Services
         public IList<Joke> AddNewJokes()
         {
             var newJokes = new List<Joke>();
-            var webResources = _uow.Resources.GetAll().ToList();
-            if (webResources[0].Type == null)
-                Console.WriteLine();
-            Parallel.ForEach(webResources, webResource =>
+            var webResources = _uow.Resources.GetAll().Select(x => new 
+                {
+                    TypeId = x.Type.Id,
+                    ResourseId = x.Id, 
+                    x.Url,
+                    x.Rules
+                });
+            
+            Parallel.ForEach(webResources, webResourse =>
             {
-                if (webResource.Type == null)
-                    Console.WriteLine();
-                var result = ParseResourse(webResource);
-                if (result != null)
-                    newJokes.AddRange(result);
+                var result = ParserHelper
+                    .ParseResourse(webResourse.TypeId, webResourse.Url)
+                    .ApplyRules(webResourse.Rules)
+                    .RemoveOldJokes(GetLastJoke(webResourse.ResourseId))
+                    .CreateJokes(_uow.Resources.Get(webResourse.ResourseId));
+                newJokes.AddRange(result);
             });
+
             if (newJokes.Count > 0)
             {
                 _uow.Jokes.AddMany(newJokes);
-                
+                _uow.CommitChanges();
             }
             return newJokes;
         }
 
+        public IList<Joke> FixExistingJokes()
+        {
+            var jokes = _uow.Jokes.GetAll().ToList();
+            var rules = _uow.ResourceProcessingRule.GetAll().ToList();
+
+            foreach (var joke in jokes)
+            {
+                var currentJoke = joke;
+                foreach (var rule in rules.Where(r => r.Resource.Id == currentJoke.Resource.Id))
+                    currentJoke.Description = RuleCreator.GetRule(rule.Rule)
+                                                  .Apply(currentJoke.Description, rule.Argument);
+                
+                if(string.IsNullOrEmpty(currentJoke.Description))
+                     _uow.Jokes.Delete(currentJoke);
+                else 
+                    _uow.Jokes.Update(currentJoke);
+            }
+
+            _uow.CommitChanges();
+            return jokes;
+        }
+
         #region Private Methods
 
-        private IEnumerable<Joke> ParseResourse(Resource webResource)
+        private string GetLastJoke(int resourceId)
         {
-
-            var parser = GetParser((Enums.ResourceType)webResource.Type.Id);
-            var result = parser.Parse(webResource.Url);
-            var jokes =
-                result.Select(j => new Joke {Description = j, Resource = webResource, CreatedDate = DateTime.Now})
-                        .ToList();
-            return HasNewJokes(jokes) ? jokes : null;
+            var lastJoke = _uow.Jokes.GetAll()
+                                .Where(x => x.Resource.Id == resourceId)
+                                .OrderByDescending(x => x.CreatedDate)
+                                .FirstOrDefault();
+            return lastJoke == null ? null : lastJoke.Description;
         }
-
-        private bool HasNewJokes(List<Joke> jokes)
-        {
-            if (jokes.Count == 0)
-                return false;
-            var lastJoke = _uow.Jokes.GetAll().ToList()
-                                        .Where(x => x.Resource.Id == jokes[0].Resource.Id)
-                                        .OrderByDescending(x => x.CreatedDate)
-                                        .FirstOrDefault();
-            return lastJoke == null || !jokes.Select(x => x.Description).Contains(lastJoke.Description);
-        }
-
-        private FeedParserBase GetParser(Enums.ResourceType webResourceType)
-        {
-            switch (webResourceType)
-            {
-                case Enums.ResourceType.RSS:
-                    return new RssParser();
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
+        
         #endregion
     }
 }

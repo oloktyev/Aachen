@@ -8,12 +8,6 @@
         <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
         <link href="~/Content/Aachen.css" rel="stylesheet" />
         
-        <script src="~/Scripts/Libs/Jquery/jquery-1.9.1.js"></script>
-        <script src="~/Scripts/Libs/Angular/angular.js"></script>
-        <script src="~/Scripts/Libs/Angular/angular-resource.js"></script>
-        <script src="~/Scripts/Libs/Angular/angular-sanitize.js"></script>
-        <script src="~/Scripts/Modules/JokesController.js"></script>
-        
     </head>
     
     <body>
@@ -48,7 +42,7 @@
                     <li class="span5 aachen-joke" 
                         ng-repeat="item in items">
                         <div ng-bind-html="item.Description"></div>
-                        <a ng-href="{{item.Resource.Url}}" ng-bind-html="item.Resource.Name" target="_blank"></a>
+                        <a ng-href="{{item.ResourseURL}}" ng-bind-html="item.ResourseName" target="_blank"></a>
                     </li>
                 </ul>
             </div>
@@ -60,5 +54,11 @@
         </div><!--/.fluid-container-->
     </body>
 </html>
+
+<script src="~/Scripts/Libs/Jquery/jquery-1.9.1.js"></script>
+<script src="~/Scripts/Libs/Angular/angular.js"></script>
+<script src="~/Scripts/Libs/Angular/angular-resource.js"></script>
+<script src="~/Scripts/Libs/Angular/angular-sanitize.js"></script>
+<script src="~/Scripts/Modules/JokesController.js"></script>
 
 

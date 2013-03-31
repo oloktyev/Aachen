@@ -22,6 +22,7 @@ namespace Aachen.Core.EF
 
         public IRepository<Joke, long> Jokes { get { return new GenericRepository<Joke, long>(DbContext); } }
         public IRepository<Resource, int> Resources { get { return new GenericRepository<Resource, int>(DbContext); } }
+        public IRepository<ResourceProcessingRule, int> ResourceProcessingRule { get { return new GenericRepository<ResourceProcessingRule, int>(DbContext); } }
 
         public void CommitChanges()
         {

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Aachen.Core.Base;
 
 namespace Aachen.Infrastructure.Parsers
 {
@@ -68,5 +70,16 @@ namespace Aachen.Infrastructure.Parsers
                                                             };
 
         public abstract List<string> Parse(string url);
+
+        public static FeedParserBase GetParser(Enums.ResourceType webResourceType)
+        {
+            switch (webResourceType)
+            {
+                case Enums.ResourceType.RSS:
+                    return new RssParser();
+                default:
+                    throw new NotImplementedException();
+            }
+        }
     }
 }

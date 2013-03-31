@@ -61,6 +61,20 @@ namespace Aachen.Infrastructure.EF
                         .Property(x => x.Name)
                         .HasMaxLength(50);
 
+            // ResourceProcessingRule
+
+            modelBuilder.Entity<ResourceProcessingRule>()
+                .HasKey(x => x.Id)
+                .Property(x => x.Id)
+                .HasColumnName("ResourceProcessingRuleId");
+
+            modelBuilder.Entity<ResourceProcessingRule>()
+                .HasRequired(x => x.Resource)
+                .WithMany(x => x.Rules)
+                .Map(a => a.MapKey("ResourceId"));
+
+            
+
         }
     }
 }

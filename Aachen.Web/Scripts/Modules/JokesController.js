@@ -7,16 +7,17 @@ function Controller($scope, $resource) {
     this.itemsPerPage = 20;
     this.Resources = {
         Recent: $resource('/Jokes/GetRecent', { first: '@first', count: '@count' })
-    }
+    };
         
     $scope.items = [];
-    $scope.LoadMore = function () {
-        var items = self.Resources.Recent.query({ first: self.scope.items.length, count: self.itemsPerPage }, function () {
+    $scope.LoadMore = function() {
+        var items = self.Resources.Recent.query({ first: self.scope.items.length, count: self.itemsPerPage }, function() {
             self.scope.items = self.scope.items.concat(items);
         });
-    }
+    };
 
     $scope.LoadMore();
+    
     return (this);
 }
 

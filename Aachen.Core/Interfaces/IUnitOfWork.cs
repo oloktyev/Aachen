@@ -7,6 +7,7 @@ namespace Aachen.Core.Interfaces
     {
         IRepository<Joke, long> Jokes { get; }
         IRepository<Resource, int> Resources { get; }
+        IRepository<ResourceProcessingRule, int> ResourceProcessingRule { get; }
 
         void CommitChanges();
     }

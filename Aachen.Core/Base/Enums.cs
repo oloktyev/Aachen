@@ -11,5 +11,11 @@ namespace Aachen.Core.Base
         {
             RSS = 1
         }
+
+        public enum ResourceProcessingRule
+        {
+            RemoveFrom = 1,
+            Replace = 2
+        }
     }
 }
