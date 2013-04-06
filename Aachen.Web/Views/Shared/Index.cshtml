@@ -1,0 +1,56 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en" ng-app="aachen.app">
+<head>
+    <meta charset="utf-8">
+    <title>Jokes portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    @Styles.Render("~/content/css");
+        
+</head>
+    
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#">Aachen</a>
+                <div class="nav-collapse collapse">
+                    <p class="navbar-text pull-right">
+                        Logged in as <a href="#" class="navbar-link">Username</a>
+                    </p>
+                    <ul class="nav">
+                        <li class="active"><a href="#">Новые</a></li>
+                        <li><a href="#featured">Избранное</a></li>
+                        <li><a href="#categories">Категории</a></li>
+                        <li><a href="#toprated">Лучшие</a></li>
+                        <li><a href="#add">Добавить</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+      
+    <div class="container">
+        <div class="aachen-content">
+            <ng:view></ng:view>
+        </div>
+
+        <hr>
+        <footer>
+            <p>&copy; Company 2012</p>
+        </footer>
+    </div><!--/.fluid-container-->
+</body>
+</html>
+
+@Scripts.Render("~/content/js");
+
+
+
+

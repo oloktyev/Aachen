@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Helpers;
+﻿using Aachen.Web.App_Start;
+using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Threading.Tasks;
 
 namespace Aachen.Web
 {
@@ -21,37 +17,14 @@ namespace Aachen.Web
             filters.Add(new HandleErrorAttribute());
         }
 
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                name: "Default",
-                url: "",
-                defaults: new { controller = "Jokes", action = "Jokes", pageNumber = 1 }
-            );
-
-            routes.MapRoute(
-                name: "Jokes",
-                url: "Jokes/{action}",
-                defaults: new { controller = "Jokes" }
-            );
-
-            routes.MapRoute(
-                name: "Home",
-                url: "Home/{action}",
-                defaults: new { controller = "Home" }
-            );
-        }
-
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
 
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
             RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);
 
-            BundleTable.Bundles.RegisterTemplateBundles();
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

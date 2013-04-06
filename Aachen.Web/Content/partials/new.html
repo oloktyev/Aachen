@@ -1,0 +1,11 @@
+﻿<div ng-scroll="loadMore()">
+    <ul class="thumbnails">
+        <li class="span5 aachen-joke" 
+             ng-repeat="item in items"
+             ng-repeat-finished="alignContent()">
+            <div ng-bind-html="item.Description"></div>
+            <a ng-href="{{item.ResourceUrl}}" ng-bind-html="item.ResourceName" target="_blank"></a>
+        </li>
+    </ul>
+</div>
+

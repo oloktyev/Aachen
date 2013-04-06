@@ -68,7 +68,7 @@ namespace Aachen.Infrastructure.Services
             {
                 var result = ParserHelper
                     .ParseResourse(webResourse.TypeId, webResourse.Url)
-                    .ApplyRules(webResourse.Rules)
+                    //.ApplyRules(webResourse.Rules)
                     .RemoveOldJokes(GetLastJoke(webResourse.ResourseId))
                     .CreateJokes(_uow.Resources.Get(webResourse.ResourseId));
                 newJokes.AddRange(result);
