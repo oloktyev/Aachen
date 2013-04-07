@@ -7,20 +7,14 @@
     };
 
     $scope.items = [];
+    $scope.container = $('.thumbnails');
+
+    $scope.$on('$viewContentLoaded', function () {
+        $scope.container.masonry();
+    });
 
     $scope.alignContent = function () {
-        $('.thumbnails').masonry({
-            //itemSelector: '.aachen-joke',
-            singleMode: false,
-            //isResizable: true,
-            isAnimated: true,
-            animationOptions: {
-                queue: false,
-                duration: 500
-            }
-        });
-        
-        //$('.thumbnails').masonry('appended', $('.aachen-joke'));
+        $scope.container.masonry('reload');
     };
 
     $scope.loadMore = function() {
@@ -30,8 +24,6 @@
     };
 
     $scope.loadMore();
-
-    return (this);
 };
 
 aachen.app.controller("NewController", aachen.baseCtrl);

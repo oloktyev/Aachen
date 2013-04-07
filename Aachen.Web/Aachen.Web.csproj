@@ -219,7 +219,7 @@
   <ItemGroup>
     <Content Include="Content\partials\new.html" />
     <Content Include="Content\partials\featured.html" />
-    <None Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
