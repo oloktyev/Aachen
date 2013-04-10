@@ -68,7 +68,7 @@ namespace Aachen.Infrastructure.Services
             {
                 var result = ParserHelper
                     .ParseResourse(webResourse.TypeId, webResourse.Url)
-                    //.ApplyRules(webResourse.Rules)
+                    .ApplyRules(webResourse.Rules.Where(x => x.Active).ToList())
                     .RemoveOldJokes(GetLastJoke(webResourse.ResourseId))
                     .CreateJokes(_uow.Resources.Get(webResourse.ResourseId));
                 newJokes.AddRange(result);
@@ -85,7 +85,7 @@ namespace Aachen.Infrastructure.Services
         public IList<Joke> FixExistingJokes()
         {
             var jokes = _uow.Jokes.GetAll().ToList();
-            var rules = _uow.ResourceProcessingRule.GetAll().ToList();
+            var rules = _uow.ResourceProcessingRule.GetAll().Where(x => x.Active).ToList();
 
             foreach (var joke in jokes)
             {
@@ -102,6 +102,20 @@ namespace Aachen.Infrastructure.Services
 
             _uow.CommitChanges();
             return jokes;
+        }
+
+        public void IncrementRating(long jokeId)
+        {
+            var joke = _uow.Jokes.Get(jokeId);
+            joke.Rating++;
+            _uow.CommitChanges();
+        }
+
+        public void DecrementRating(long jokeId)
+        {
+            var joke = _uow.Jokes.Get(jokeId);
+            joke.Rating--;
+            _uow.CommitChanges();
         }
 
         #region Private Methods

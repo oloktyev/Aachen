@@ -3,6 +3,15 @@
     background-image: url('http://cdn.jojari.com/images/jojari/body-speckle.gif');
 }
 
+footer {
+    float: left;
+    width: 100%;
+}
+
+hr {
+    margin: 10px 0;
+}
+
 .aachen-content {
     margin: 60px 30px 0 30px;
 }
@@ -26,9 +35,4 @@
 
 .aachen-joke:nth-child(odd) {
      clear: left;
-}
-
-footer {
-    float: left;
-    width: 100%;
 }

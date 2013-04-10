@@ -1,5 +1,5 @@
 ﻿var aachen = {};
-aachen.app = angular.module("aachen.app", ['ngResource', 'ngSanitize']);
+aachen.app = angular.module("aachen.app", ['ngResource', 'ngSanitize', 'aachen.Api', 'aachen.Storage']);
 
 aachen.app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 

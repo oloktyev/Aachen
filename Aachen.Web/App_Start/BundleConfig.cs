@@ -24,6 +24,8 @@ namespace Aachen.Web.App_Start
                         "~/Scripts/Libs/Angular/angular-sanitize.js",
                         "~/Content/js/app.js",
                         "~/Content/js/directives.js",
+                        "~/Content/js/resources.js",
+                        "~/Content/js/storage.js",
                         "~/Content/js/controllers.js"));
 
         }

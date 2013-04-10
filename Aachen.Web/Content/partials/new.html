@@ -5,6 +5,12 @@
              ng-repeat-finished="alignContent()">
             <div ng-bind-html="item.Description"></div>
             <a ng-href="{{item.ResourceUrl}}" ng-bind-html="item.ResourceName" target="_blank"></a>
+            <hr/>
+            <div class="aachen-rating">
+                <a class="btn" ng-click="updateRating(item, 1)">+</a>
+                <span class="btn disabled">{{item.Rating}}</span>
+                <button class="btn" ng-click="updateRating(item, -1)">-</button>
+            </div>
         </li>
     </ul>
 </div>

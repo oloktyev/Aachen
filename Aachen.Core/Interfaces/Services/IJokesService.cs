@@ -17,5 +17,9 @@ namespace Aachen.Core.Interfaces.Services
         IList<Joke> AddNewJokes();
 
         IList<Joke> FixExistingJokes();
+
+        void IncrementRating(long jokeId);
+
+        void DecrementRating(long jokeId);
     }
 }

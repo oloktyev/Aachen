@@ -8,5 +8,6 @@ namespace Aachen.Core.Model
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public virtual Resource Resource { get; set; }
+        public int Rating { get; set; }
     }
 }

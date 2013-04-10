@@ -158,6 +158,8 @@
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\directives.js" />
+    <Content Include="Content\js\resources.js" />
+    <Content Include="Content\js\storage.js" />
     <Content Include="Content\partials\categories.html" />
     <Content Include="Content\partials\add.html" />
     <Content Include="Content\partials\toprated.html" />

@@ -1,10 +1,7 @@
-﻿aachen.baseCtrl = function($scope, $resource) {
+﻿aachen.baseCtrl = function ($scope, $resource, Api, Storage) {
     var self = this;
     this.scope = $scope;
     this.itemsPerPage = 20;
-    this.Resources = {
-        Recent: $resource('api/Resource/New', { first: '@first', count: '@count' })
-    };
 
     $scope.items = [];
     $scope.container = $('.thumbnails');
@@ -18,9 +15,17 @@
     };
 
     $scope.loadMore = function() {
-        var items = self.Resources.Recent.query({ first: self.scope.items.length, count: self.itemsPerPage }, function() {
+        var items = Api.getNew({ first: self.scope.items.length, count: self.itemsPerPage }, function () {
             self.scope.items = self.scope.items.concat(items);
         });
+    };
+    
+    $scope.updateRating = function (item, value) {
+        if (!Storage.contains(item.Id)) {
+            item.Rating = item.Rating + value;
+            Storage.put(item.Id);
+            Api.updateRating({ jokeId: item.Id, value: value });
+        }
     };
 
     $scope.loadMore();

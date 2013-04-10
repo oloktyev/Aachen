@@ -32,12 +32,22 @@ namespace Aachen.Web.Controllers
             var result = _jokesService.GetRecent(first, count)
                 .Select(x => new JokeViewModel
                     {
+                        Id = x.Id,
                         Description = x.Description,
                         ResourceName = x.Resource.Name,
-                        ResourceUrl = x.Resource.Url
+                        ResourceUrl = x.Resource.Url,
+                        Rating = x.Rating
                     })
                 .ToList();
             return result;
+        }
+
+        public void PostRating(long jokeId, int value)
+        {
+            if (value > 0)
+                _jokesService.IncrementRating(jokeId);
+            else if (value < 0)
+                _jokesService.DecrementRating(jokeId);
         }
     }
 }
