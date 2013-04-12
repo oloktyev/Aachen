@@ -33,6 +33,7 @@ hr {
     background-color: white;
 }
 
-.aachen-joke:nth-child(odd) {
-     clear: left;
+.aachen-joke-content {
+    white-space: pre-wrap;
 }
+
