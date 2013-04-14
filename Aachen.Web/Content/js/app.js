@@ -1,5 +1,5 @@
 ﻿var aachen = {};
-aachen.app = angular.module("aachen.app", ['ngResource', 'ngSanitize', 'aachen.Api', 'aachen.Storage']);
+aachen.app = angular.module("aachen.app", ['ngResource', 'ngSanitize', 'aachen.Api', 'aachen.Storage', 'aachen.Masonry']);
 
 aachen.app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
@@ -9,7 +9,7 @@ aachen.app.config(['$routeProvider', '$locationProvider', function ($routeProvid
     //$locationProvider.html5Mode(true);
     
     $routeProvider
-        .when('/', { templateUrl: partialsDir + 'new.html', controller: aachen.baseCtrl })
+        .when('/', { templateUrl: partialsDir + 'new.html' })
         .when('/featured', { templateUrl: partialsDir + 'featured.html', controller: aachen.baseCtrl })
         .when('/categories', { templateUrl: partialsDir + 'categories.html' })
         .when('/toprated', { templateUrl: partialsDir + 'toprated.html' })

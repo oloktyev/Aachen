@@ -14,6 +14,8 @@ namespace Aachen.Core.Interfaces.Services
 
         IQueryable<Joke> GetRecent(int first, int count);
 
+        IQueryable<Joke> GetTopRated(int first, int count);
+
         IList<Joke> AddNewJokes();
 
         IList<Joke> FixExistingJokes();

@@ -53,6 +53,17 @@ namespace Aachen.Infrastructure.Services
                 .Take(count);
         }
 
+        public IQueryable<Joke> GetTopRated(int first, int count)
+        {
+            if (first < 0 || count <= 0)
+                return Enumerable.Empty<Joke>().AsQueryable();
+
+            return _uow.Jokes.GetAll()
+                .OrderByDescending(x => x.Rating)
+                .Skip(first)
+                .Take(count);
+        }
+
         public IList<Joke> AddNewJokes()
         {
             var newJokes = new List<Joke>();

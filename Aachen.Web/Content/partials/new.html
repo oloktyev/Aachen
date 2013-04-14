@@ -1,5 +1,5 @@
-﻿<div ng-scroll="loadMore()">
-    <ul class="thumbnails">
+﻿<div ng-controller="NewController" ng-scroll="loadMore()">
+    <ul class="thumbnails" ng-controller="ContentController">
         <li class="span5 aachen-joke" 
              ng-repeat="item in items"
              ng-repeat-finished="alignContent()">

@@ -1,7 +1,7 @@
 ﻿aachen.app.directive('ngRepeatFinished', function () {
-    return function (scope, element, attributes) {
-        if (scope.$last) {
-            scope.$evalAsync(attributes.ngRepeatFinished);
+    return function ($scope, element, attributes) {
+        if ($scope.$last) {
+            $scope.$evalAsync(attributes.ngRepeatFinished);
         }
     };
 });

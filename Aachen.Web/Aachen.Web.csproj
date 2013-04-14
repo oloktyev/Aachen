@@ -157,6 +157,7 @@
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\js\app.js" />
+    <Content Include="Content\js\masonry.js" />
     <Content Include="Content\js\directives.js" />
     <Content Include="Content\js\resources.js" />
     <Content Include="Content\js\storage.js" />
@@ -188,7 +189,8 @@
     <Content Include="Scripts\Libs\Bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Libs\Angular\jstd-scenario-adapter-config.js" />
     <Content Include="Scripts\Libs\Angular\jstd-scenario-adapter.js" />
-    <Content Include="Scripts\Libs\Jquery\jquery.masonry.min.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery.imagesloaded.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery.masonry.js" />
     <Content Include="Scripts\Libs\Modernizr\modernizr-2.0.6-development-only.js" />
     <Content Include="Content\js\controllers.js" />
     <Content Include="Web.config" />

@@ -19,8 +19,8 @@ namespace Aachen.Web.App_Start
 
             routes.MapHttpRoute(
               name: "DefaultApi",
-              routeTemplate: "api/{controller}/{id}",
-              defaults: new { id1 = RouteParameter.Optional }
+              routeTemplate: "api/{controller}/{action}/{id}",
+              defaults: new { id = RouteParameter.Optional }
             );
         }
     }

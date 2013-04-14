@@ -42,6 +42,21 @@ namespace Aachen.Web.Controllers
             return result;
         }
 
+        public IList<JokeViewModel> GetTopRated(int first, int count)
+        {
+            var result = _jokesService.GetTopRated(first, count)
+                .Select(x => new JokeViewModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    ResourceName = x.Resource.Name,
+                    ResourceUrl = x.Resource.Url,
+                    Rating = x.Rating
+                })
+                .ToList();
+            return result;
+        }
+
         public void PostRating(long jokeId, int value)
         {
             if (value > 0)
