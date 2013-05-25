@@ -37,3 +37,18 @@ hr {
     white-space: pre-wrap;
 }
 
+#aachen-loading { 
+    background: none repeat scroll 0 0 #000000; 
+    bottom: 40px; 
+    color: #FFFFFF; 
+    height: 100px; 
+    left: 40%; 
+    opacity: 0.8; 
+    padding: 10px; 
+    position: fixed; 
+    width: 200px; 
+    z-index: 5000; 
+    border-radius: 10px; 
+    text-align: center; 
+    display: none;
+}

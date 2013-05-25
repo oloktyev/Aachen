@@ -2,6 +2,10 @@
     itemsPerPage: 20
 };
 
+aachen.controls = {
+    loading: $('#aachen-loading')
+}
+
 aachen.controllers = aachen.controllers || {};
 
 aachen.controllers.base = function ($scope, $location) {
@@ -30,8 +34,10 @@ aachen.controllers.new = function ($scope, Api) {
     $scope.items = [];
     
     $scope.loadMore = function () {
+        aachen.controls.loading.show();
         var items = Api.getNew({ first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
             $scope.items = $scope.items.concat(items);
+            aachen.controls.loading.hide();
         });
     };
     
@@ -42,8 +48,10 @@ aachen.controllers.topRated = function ($scope, $resource, Api) {
     $scope.items = [];
 
     $scope.loadMore = function () {
+        aachen.controls.loading.show();
         var items = Api.getTopRated({ first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
             $scope.items = $scope.items.concat(items);
+            aachen.controls.loading.hide();
         });
     };
 

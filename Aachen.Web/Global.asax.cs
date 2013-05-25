@@ -31,7 +31,7 @@ namespace Aachen.Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             
-            var timer = new Timer {Interval = 5*1000, AutoReset = true };
+            var timer = new Timer {Interval = 60*60*1000, AutoReset = true };
             timer.Elapsed += OnTimerElapsed;
             timer.Start();
 
