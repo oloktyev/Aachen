@@ -36,7 +36,8 @@ aachen.controllers.new = function ($scope, Api) {
     $scope.loadMore = function () {
         aachen.controls.loading.show();
         var items = Api.getNew({ first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
-            $scope.items = $scope.items.concat(items);
+            if (items.First === $scope.items.length)
+                $scope.items = $scope.items.concat(items.JokeList);
             aachen.controls.loading.hide();
         });
     };
@@ -50,7 +51,8 @@ aachen.controllers.topRated = function ($scope, $resource, Api) {
     $scope.loadMore = function () {
         aachen.controls.loading.show();
         var items = Api.getTopRated({ first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
-            $scope.items = $scope.items.concat(items);
+            if (items.First === $scope.items.length)
+                $scope.items = $scope.items.concat(items.JokeList);
             aachen.controls.loading.hide();
         });
     };

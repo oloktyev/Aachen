@@ -8,6 +8,7 @@
 
 aachen.app.directive('ngScroll', function () {
     return function ($scope, element, attributes) {
+        $(window).unbind('scroll');
         $(window).bind('scroll', function () {
             if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
                 $scope.$apply(attributes.ngScroll);

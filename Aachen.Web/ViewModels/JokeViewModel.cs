@@ -13,4 +13,10 @@ namespace Aachen.Web.ViewModels
         public string ResourceUrl { get; set; }
         public int Rating { get; set; }
     }
+
+    public class JokeListViewModel
+    {
+        public IList<JokeViewModel> JokeList { get; set; }
+        public int First { get; set; }
+    }
 }

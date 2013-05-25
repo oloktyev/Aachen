@@ -34,6 +34,7 @@ namespace Aachen.Web
             var timer = new Timer {Interval = 60*60*1000, AutoReset = true };
             timer.Elapsed += OnTimerElapsed;
             timer.Start();
+            OnTimerElapsed(null, null);
 
         }
 

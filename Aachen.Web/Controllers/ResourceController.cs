@@ -27,9 +27,9 @@ namespace Aachen.Web.Controllers
             _jokesService = jokesService;
         }
 
-        public IList<JokeViewModel> GetNew(int first, int count)
+        public JokeListViewModel GetNew(int first, int count)
         {
-            var result = _jokesService.GetRecent(first, count)
+            var jokeList = _jokesService.GetRecent(first, count)
                 .Select(x => new JokeViewModel
                     {
                         Id = x.Id,
@@ -39,12 +39,17 @@ namespace Aachen.Web.Controllers
                         Rating = x.Rating
                     })
                 .ToList();
-            return result;
+
+            return new JokeListViewModel
+            {
+                JokeList = jokeList,
+                First = first
+            };
         }
 
-        public IList<JokeViewModel> GetTopRated(int first, int count)
+        public JokeListViewModel GetTopRated(int first, int count)
         {
-            var result = _jokesService.GetTopRated(first, count)
+            var jokeList = _jokesService.GetTopRated(first, count)
                 .Select(x => new JokeViewModel
                 {
                     Id = x.Id,
@@ -54,7 +59,11 @@ namespace Aachen.Web.Controllers
                     Rating = x.Rating
                 })
                 .ToList();
-            return result;
+            return new JokeListViewModel
+            {
+                JokeList = jokeList,
+                First = first
+            };
         }
 
         public void PostRating(long jokeId, int value)
