@@ -1,20 +1,20 @@
 ﻿'use strict';
 
 angular.module('aachen.Masonry', [])
-    .factory('Masonry', function () {
-        var $container;
+    .service('Masonry', function () {
+        var $container;// = $('.thumbnails');
 
-        return {
-            init: function () {
-                $container = $('.thumbnails');
-                $container.masonry();
-            },
 
-		    alignContent: function () {
-		        $container.imagesLoaded(function () {
-		            $container.masonry('reload');
-		        });
-		        $container.masonry('reload');
-		    }
+        this.init = function() {
+            $container = $('.thumbnails');
+            $container.masonry();
         };
-});
+
+        this.alignContent = function() {
+            $container.imagesLoaded(function() {
+                $container.masonry('reload');
+            });
+            $container.masonry('reload');
+        };
+
+    });

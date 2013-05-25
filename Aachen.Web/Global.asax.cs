@@ -1,15 +1,18 @@
-﻿using Aachen.Web.App_Start;
+﻿using System.Data.Entity;
+using System.Diagnostics;
+using System.Web;
+using Aachen.Core.EF;
+using Aachen.Infrastructure.Services;
+using Aachen.Web.App_Start;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Timers;
 
 namespace Aachen.Web
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : System.Web.HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -23,8 +26,29 @@ namespace Aachen.Web
 
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             RegisterGlobalFilters(GlobalFilters.Filters);
-
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+            var timer = new Timer {Interval = 60*60*1000, AutoReset = true };
+            timer.Elapsed += OnTimerElapsed;
+            timer.Start();
+
+        }
+
+        private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            var failCount = 0;
+            do
+            {
+
+                try
+                {
+                    new JokesService(new EfUnitOfWork()).AddNewJokes();
+                }
+                catch (Exception)
+                {
+                    failCount++;
+                }
+            } while (failCount > 0 && failCount <= 3);
         }
     }
 }

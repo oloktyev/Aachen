@@ -1,30 +1,26 @@
 ﻿@using System.Web.Optimization
+
 <!DOCTYPE html>
 <html lang="en" ng-app="aachen.app">
 <head>
     <meta charset="utf-8">
-    <title>Jokes portal</title>
+    <title>Jokes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-    @Styles.Render("~/content/css")
-        
+    @Styles.Render("~/aachen/css")      
 </head>
     
 <body ng-controller="BaseController">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="#">Aachen</a>
+                <a class="brand" href="#">Лангуст</a>
                 <div class="nav-collapse collapse">
-                    <p class="navbar-text pull-right">
-                        Logged in as <a href="#" class="navbar-link">Username</a>
-                    </p>
                     <ul class="nav">
                         <li ng-class="{ active: activePath=='/' }"><a href="#">Новые</a></li>
-                        <li ng-class="{ active: activePath=='/featured' }"><a href="#featured">Избранное</a></li>
-                        <li ng-class="{ active: activePath=='/categories' }"><a href="#categories">Категории</a></li>
                         <li ng-class="{ active: activePath=='/toprated' }"><a href="#toprated">Лучшие</a></li>
-                        <li ng-class="{ active: activePath=='/add' }"><a href="#add">Добавить</a></li>
+                        <!--<li ng-class="{ active: activePath=='/featured' }"><a href="#featured">Избранное</a></li>-->
+                        <!--<li ng-class="{ active: activePath=='/categories' }"><a href="#categories">Категории</a></li>-->
+                        <!--<li ng-class="{ active: activePath=='/add' }"><a href="#add">Добавить</a></li>-->
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -38,11 +34,11 @@
         
         <hr>
         <footer>
-            <p>&copy; Company 2012</p>
+            
         </footer>
     </div>
     
-    @Scripts.Render("~/content/js")
+    @Scripts.Render("~/aachen/js")
 </body>
 </html>
 

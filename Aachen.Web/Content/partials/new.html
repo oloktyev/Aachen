@@ -4,7 +4,7 @@
              ng-repeat="item in items"
              ng-repeat-finished="alignContent()">
             <div ng-bind-html="item.Description" class="aachen-joke-content"></div>
-            <a ng-href="{{item.ResourceUrl}}" ng-bind-html="item.ResourceName" target="_blank"></a>
+            <!--<a ng-href="{{item.ResourceUrl}}" ng-bind-html="item.ResourceName" target="_blank"></a>-->
             <hr/>
             <div class="aachen-rating">
                 <a class="btn" ng-click="updateRating(item, 1)">+</a>

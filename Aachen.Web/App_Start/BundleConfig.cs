@@ -12,11 +12,11 @@ namespace Aachen.Web.App_Start
         {
             bundles.IgnoreList.Clear();
 
-            bundles.Add(new StyleBundle("~/content/css").Include(
+            bundles.Add(new StyleBundle("~/aachen/css").Include(
                         "~/Content/css/bootstrap.css",
                         "~/Content/css/aachen.css"));
 
-            bundles.Add(new ScriptBundle("~/content/js").Include(
+            bundles.Add(new ScriptBundle("~/aachen/js").Include(
                         "~/Scripts/Libs/Jquery/jquery-1.9.1.js",
                         "~/Scripts/Libs/Jquery/jquery.masonry.js",
                         "~/Scripts/Libs/Jquery/jquery.imagesloaded.js",
