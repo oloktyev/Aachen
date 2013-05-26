@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Aachen.Core.EF.Repositories
 {
-    class GenericRepository<T, TId> : IRepository<T, TId> where T : Entity<TId>
+    public class GenericRepository<T, TId> : IRepository<T, TId> where T : Entity<TId>
     {
         protected DbContext DbContext { get; set; }
         protected DbSet<T> DbSet { get; set; }

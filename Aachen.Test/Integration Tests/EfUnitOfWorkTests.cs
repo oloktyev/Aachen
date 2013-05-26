@@ -66,5 +66,13 @@ namespace Aachen.Test.IntegrationTests
             Assert.IsTrue(result.Count > 0);
             Assert.IsNotNull(result[0].Type);
         }
+
+        [TestMethod]
+        public void GetLatestJokes_Should_Return_Results()
+        {
+            var repository = _uow.Jokes;
+            var result = repository.GetLatestJokes();
+            Assert.IsTrue(result.Count > 0);
+        }
     }
 }

@@ -36,7 +36,8 @@ namespace Aachen.Web.Controllers
                         Description = x.Description,
                         ResourceName = x.Resource.Name,
                         ResourceUrl = x.Resource.Url,
-                        Rating = x.Rating
+                        Rating = x.Rating,
+                        CreatedDate = x.CreatedDate
                     })
                 .ToList();
 

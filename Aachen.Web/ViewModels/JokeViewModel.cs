@@ -12,6 +12,7 @@ namespace Aachen.Web.ViewModels
         public string ResourceName { get; set; }
         public string ResourceUrl { get; set; }
         public int Rating { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 
     public class JokeListViewModel

@@ -48,8 +48,10 @@
   <ItemGroup>
     <Compile Include="Base\Entity.cs" />
     <Compile Include="Base\Enums.cs" />
+    <Compile Include="DTO\LatestJokesDTO.cs" />
     <Compile Include="DTO\WebResourseDTO.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\Repositories\IJokeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\Services\IJokesService.cs" />
     <Compile Include="Model\ResourceProcessingRule.cs" />

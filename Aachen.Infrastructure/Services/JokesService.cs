@@ -48,7 +48,7 @@ namespace Aachen.Infrastructure.Services
                 return Enumerable.Empty<Joke>().AsQueryable();
 
             return _uow.Jokes.GetAll()
-                .OrderByDescending(x => x.CreatedDate)
+                .OrderByDescending(x => x.Id)
                 .Skip(first)
                 .Take(count);
         }
@@ -67,27 +67,30 @@ namespace Aachen.Infrastructure.Services
         public IList<Joke> AddNewJokes()
         {
             var newJokes = new List<Joke>();
-            var webResources = _uow.Resources.GetAll().Select(x => new 
+            var allResources = _uow.Resources.GetAll().ToList();
+            var webResources = allResources.Select(x => new 
                 {
                     TypeId = x.Type.Id,
                     ResourseId = x.Id, 
                     x.Url,
                     x.Rules
                 });
-            
+
+            var lastJokes = _uow.Jokes.GetLatestJokes();
             Parallel.ForEach(webResources, webResourse =>
-            {
-                var result = ParserHelper
-                    .ParseResourse(webResourse.TypeId, webResourse.Url)
-                    .ApplyRules(webResourse.Rules.Where(x => x.Active).ToList())
-                    .RemoveOldJokes(GetLastJoke(webResourse.ResourseId))
-                    .CreateJokes(_uow.Resources.Get(webResourse.ResourseId));
-                newJokes.AddRange(result);
+                {
+                    var lastJoke = lastJokes.FirstOrDefault(x => x.ResourceId == webResourse.ResourseId);
+                    var result = ParserHelper
+                        .ParseResourse(webResourse.TypeId, webResourse.Url)
+                        .ApplyRules(webResourse.Rules.Where(x => x.Active).ToList())
+                        .RemoveOldJokes(lastJoke == null ? null : lastJoke.Description)
+                        .CreateJokes(allResources.First(x => x.Id == webResourse.ResourseId));
+                    newJokes.AddRange(result);
             });
 
             if (newJokes.Count > 0)
             {
-                _uow.Jokes.AddMany(newJokes);
+                _uow.Jokes.AddMany(newJokes.OrderBy(x => x.Description[3]).ToList());
                 _uow.CommitChanges();
             }
             return newJokes;

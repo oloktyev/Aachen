@@ -52,6 +52,7 @@
     <Compile Include="EF\AachenDbContext.cs" />
     <Compile Include="EF\EfUnitOfWork.cs" />
     <Compile Include="EF\GenericRepository.cs" />
+    <Compile Include="EF\JokeRepository.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\NLogLogger .cs" />
     <Compile Include="Parsers\FeedParserBase.cs" />
