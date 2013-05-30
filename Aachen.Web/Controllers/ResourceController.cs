@@ -67,9 +67,9 @@ namespace Aachen.Web.Controllers
             };
         }
 
-        public JokeListViewModel GetFeatured(IList<long> jokes, int first)
+        public JokeListViewModel PostFeatured(FeaturedJokeViewModel featuredJokes)
         {
-            var jokeList = _jokesService.GetFeatured(jokes)
+            var jokeList = _jokesService.GetFeatured(featuredJokes.Jokes)
                 .Select(x => new JokeViewModel
                 {
                     Id = x.Id,
@@ -83,7 +83,7 @@ namespace Aachen.Web.Controllers
             return new JokeListViewModel
             {
                 JokeList = jokeList,
-                First = first
+                First = featuredJokes.First
             };
         }
 

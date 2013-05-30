@@ -20,4 +20,10 @@ namespace Aachen.Web.ViewModels
         public IList<JokeViewModel> JokeList { get; set; }
         public int First { get; set; }
     }
+
+    public class FeaturedJokeViewModel
+    {
+        public IList<long> Jokes { get; set; }
+        public int First { get; set; }
+    }
 }
