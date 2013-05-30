@@ -2,23 +2,43 @@
 
 angular.module('aachen.Storage', ['ngResource'])
     .factory('Storage', function () {
-        var STORAGE_ID = 'aachen-storage';
+        var RATING_STORAGE_ID = 'aachen-vote-storage',
+            STAR_STORAGE_ID = 'aachen-star-storage';
 
-        function getItems() {
-            return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+        function getRatingItems() {
+            return JSON.parse(localStorage.getItem(RATING_STORAGE_ID) || '[]');
+        }
+        
+        function getStarItems() {
+            return JSON.parse(localStorage.getItem(STAR_STORAGE_ID) || '[]');
         }
 
         return {
-            get: getItems,
+            rating: {
+                get: getRatingItems,
 
-		    put: function (id) {
-		        var items = getItems();
-		        items.push(id);
-			    localStorage.setItem(STORAGE_ID, JSON.stringify(items));
-		    },
-            
-		    contains: function (id) {
-		        return getItems().indexOf(id) >= 0;
-		    }
+                put: function(id) {
+                    var items = getRatingItems();
+                    items.push(id);
+                    localStorage.setItem(RATING_STORAGE_ID, JSON.stringify(items));
+                },
+
+                contains: function(id) {
+                    return getRatingItems().indexOf(id) >= 0;
+                }
+            },
+            star: {
+                get: getStarItems,
+
+                put: function(id) {
+                    var items = getStarItems();
+                    items.push(id);
+                    localStorage.setItem(STAR_STORAGE_ID, JSON.stringify(items));
+                },
+
+                contains: function(id) {
+                    return getStarItems().indexOf(id) >= 0;
+                }
+            }
         };
 });

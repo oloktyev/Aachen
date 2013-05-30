@@ -14,6 +14,7 @@ namespace Aachen.Web.App_Start
 
             bundles.Add(new StyleBundle("~/aachen/css").Include(
                         "~/Content/css/bootstrap.css",
+                        "~/Content/css/bootstrap-responsive.css",
                         "~/Content/css/aachen.css"));
 
             bundles.Add(new ScriptBundle("~/aachen/js").Include(

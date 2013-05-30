@@ -64,6 +64,12 @@ namespace Aachen.Infrastructure.Services
                 .Take(count);
         }
 
+        public IQueryable<Joke> GetFeatured(IList<long> jokes)
+        {
+            return _uow.Jokes.GetAll()
+                       .Where(x => jokes.Contains(x.Id));
+        }
+
         public IList<Joke> AddNewJokes()
         {
             var newJokes = new List<Joke>();

@@ -37,6 +37,11 @@ hr {
     white-space: pre-wrap;
 }
 
+.aachen-rating {
+    float: left;
+    margin-right: 5px;
+}
+
 #aachen-loading { 
     background: none repeat scroll 0 0 #000000; 
     bottom: 40px; 

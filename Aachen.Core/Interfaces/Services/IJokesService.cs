@@ -16,6 +16,8 @@ namespace Aachen.Core.Interfaces.Services
 
         IQueryable<Joke> GetTopRated(int first, int count);
 
+        IQueryable<Joke> GetFeatured(IList<long> jokes);
+
         IList<Joke> AddNewJokes();
 
         IList<Joke> FixExistingJokes();
