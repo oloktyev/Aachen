@@ -36,7 +36,7 @@ angular.module('aachen.Storage', ['ngResource'])
                     localStorage.setItem(STAR_STORAGE_ID, JSON.stringify(items));
                 },
                 
-                delete: function(id) {
+                deleteItem: function(id) {
                     var items = getStarItems();
                     for(var i = items.length - 1; i >= 0; i--) {
                         if(items[i] === id) {

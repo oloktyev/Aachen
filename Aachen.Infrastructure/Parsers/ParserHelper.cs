@@ -48,5 +48,26 @@ namespace Aachen.Infrastructure.Parsers
                     CreatedDate = DateTime.Now
                 }).ToList();
         }
+
+		public static IList<Joke> AddCategories(this IList<Joke> jokes, IList<Category> categories)
+		{
+			foreach(var joke in jokes)
+			{
+				var jokeCategory = string.Empty;
+				foreach (var words in categories.Select(category => category.Words.Split(';')))
+				{
+					foreach (var word in words)
+					{
+						if (joke.Description.Contains(word))
+						{
+							jokeCategory += string.Format(";{0}", word);
+							break;
+						}
+					}
+				}
+				joke.Categories = jokeCategory.Remove(1, 1);
+			}
+			return jokes;
+		}
     }
 }

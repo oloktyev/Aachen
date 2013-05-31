@@ -18,6 +18,13 @@ namespace Aachen.Infrastructure.EF
             // Use singular table names
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
+			// Category
+
+			modelBuilder.Entity<Category>()
+				.HasKey(x => x.Id)
+				.Property(x => x.Id)
+				.HasColumnName("CategoryId");
+
             // Joke
 
             modelBuilder.Entity<Joke>()
@@ -72,9 +79,6 @@ namespace Aachen.Infrastructure.EF
                 .HasRequired(x => x.Resource)
                 .WithMany(x => x.Rules)
                 .Map(a => a.MapKey("ResourceId"));
-
-            
-
         }
     }
 }

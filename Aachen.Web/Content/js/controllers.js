@@ -40,13 +40,13 @@ aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
     
     $scope.removeFeatured = function (item) {
         if (Storage.star.contains(item.Id)) {
-            Storage.star.delete(item.Id);
+            Storage.star.deleteItem(item.Id);
             $scope.featured = Storage.star.get();
         }
     };
 };
 
-aachen.controllers.new = function ($scope, Api) {
+aachen.controllers.newContent = function ($scope, Api) {
     $scope.items = [];
     
     $scope.loadMore = function () {
@@ -97,6 +97,6 @@ aachen.controllers.featured = function ($scope, $resource, Api, Storage) {
 
 aachen.app.controller("BaseController", aachen.controllers.base);
 aachen.app.controller("ContentController", aachen.controllers.content);
-aachen.app.controller("NewController", aachen.controllers.new);
+aachen.app.controller("NewController", aachen.controllers.newContent);
 aachen.app.controller("FeaturedController", aachen.controllers.featured);
 aachen.app.controller("TopRatedController", aachen.controllers.topRated);

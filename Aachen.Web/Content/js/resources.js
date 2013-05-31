@@ -10,7 +10,7 @@ angular.module('aachen.Api', ['ngResource'])
               getNew: { method: 'GET', params: { content: 'resource', action: 'getNew', first: '@first', count: '@count' } },
               getTopRated: { method: 'GET', params: { content: 'resource', action: 'getTopRated', first: '@first', count: '@count' } },
               getFeatured: { method: 'POST', params: { content: 'resource', action: 'postFeatured', jokes: '@jokes', first: '@first' } },
-              updateRating: { method: 'POST', params: { content: 'resource', action: 'postRating', jokeId: '@jokeId', value: '@value' } },
+              updateRating: { method: 'POST', params: { content: 'resource', action: 'postRating', jokeId: '@jokeId', value: '@value' } }
           }
       );
       return Api;

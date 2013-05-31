@@ -21,7 +21,8 @@ namespace Aachen.Core.EF
         }
 
         public IJokeRepository Jokes { get { return new JokeRepository(DbContext); } }
-        public IRepository<Resource, int> Resources { get { return new GenericRepository<Resource, int>(DbContext); } }
+		public IRepository<Resource, int> Resources { get { return new GenericRepository<Resource, int>(DbContext); } }
+		public IRepository<Category, byte> Categories { get { return new GenericRepository<Category, byte>(DbContext); } }
         public IRepository<ResourceProcessingRule, int> ResourceProcessingRule { get { return new GenericRepository<ResourceProcessingRule, int>(DbContext); } }
 
         public void CommitChanges()

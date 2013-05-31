@@ -73,7 +73,8 @@ namespace Aachen.Infrastructure.Services
         public IList<Joke> AddNewJokes()
         {
             var newJokes = new List<Joke>();
-            var allResources = _uow.Resources.GetAll().ToList();
+			var allResources = _uow.Resources.GetAll().ToList();
+			var categories = _uow.Categories.GetAll().ToList();
             var webResources = allResources.Select(x => new 
                 {
                     TypeId = x.Type.Id,
@@ -86,11 +87,12 @@ namespace Aachen.Infrastructure.Services
             Parallel.ForEach(webResources, webResourse =>
                 {
                     var lastJoke = lastJokes.FirstOrDefault(x => x.ResourceId == webResourse.ResourseId);
-                    var result = ParserHelper
-                        .ParseResourse(webResourse.TypeId, webResourse.Url)
-                        .ApplyRules(webResourse.Rules.Where(x => x.Active).ToList())
-                        .RemoveOldJokes(lastJoke == null ? null : lastJoke.Description)
-                        .CreateJokes(allResources.First(x => x.Id == webResourse.ResourseId));
+                	var result = ParserHelper
+                		.ParseResourse(webResourse.TypeId, webResourse.Url)
+                		.ApplyRules(webResourse.Rules.Where(x => x.Active).ToList())
+                		.RemoveOldJokes(lastJoke == null ? null : lastJoke.Description)
+                		.CreateJokes(allResources.First(x => x.Id == webResourse.ResourseId))
+                		.AddCategories(categories);
                     newJokes.AddRange(result);
             });
 
@@ -123,6 +125,31 @@ namespace Aachen.Infrastructure.Services
             _uow.CommitChanges();
             return jokes;
         }
+
+		public IList<Joke> RecalculateCategories()
+		{
+			var jokes = _uow.Jokes.GetAll().ToList();
+			var categories = _uow.Categories.GetAll().ToList();
+			foreach (var joke in jokes)
+			{
+				var jokeCategory = string.Empty;
+				foreach (var words in categories.Select(category => category.Words.Split(';')))
+				{
+					foreach (var word in words)
+					{
+						if (joke.Description.Contains(word))
+						{
+							jokeCategory += string.Format(";{0}", word);
+							break;
+						}
+					}
+				}
+				joke.Categories = jokeCategory.Remove(1, 1);
+				_uow.Jokes.Update(joke);
+			}
+			_uow.CommitChanges();
+			return jokes;
+		}
 
         public void IncrementRating(long jokeId)
         {

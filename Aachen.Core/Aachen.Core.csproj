@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Aachen.Core</RootNamespace>
     <AssemblyName>Aachen.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -54,6 +54,7 @@
     <Compile Include="Interfaces\Repositories\IJokeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\Services\IJokesService.cs" />
+    <Compile Include="Model\Category.cs" />
     <Compile Include="Model\ResourceProcessingRule.cs" />
     <Compile Include="Model\ResourceType.cs" />
     <Compile Include="Model\Joke.cs" />

@@ -14,9 +14,9 @@ using System.Timers;
 
 namespace Aachen.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
-        private static readonly ILogger _logger = new NLogLogger();
+		private static readonly ILogger _logger = new Log4NetLogger();
  
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
@@ -25,16 +25,31 @@ namespace Aachen.Web
 
         protected void Application_Start()
         {
+			log4net.Config.XmlConfigurator.Configure();
+			_logger.Info("Adding new jokes...");
+
+        	Application["LastJokesUpdate"] = DateTime.Now.AddDays(-1);
             AreaRegistration.RegisterAllAreas();
 
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
-            var timer = new Timer {Interval = 5*60*1000, AutoReset = false };
-            timer.Elapsed += OnTimerElapsed;
-            timer.Start();
         }
+
+		protected void Session_Start()
+		{
+			DateTime date;
+			if (DateTime.TryParse(Application["LastJokesUpdate"].ToString(), out date))
+			{
+				if ((DateTime.Now - date).TotalHours > 1)
+				{
+					Session["LastJokesUpdate"] = DateTime.Now;
+					var timer = new Timer {Interval = 5*60*1000, AutoReset = false};
+					timer.Elapsed += OnTimerElapsed;
+					timer.Start();
+				}
+			}
+		}
 
         private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
         {
