@@ -3,16 +3,17 @@ aachen.app = angular.module("aachen.app", ['ngResource', 'ngSanitize', 'aachen.A
 
 aachen.app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
-    var partialsDir = 'Content/partials/';
+    var partialsDir = 'content/partials/';
     
     //$locationProvider.hashPrefix('!');
     //$locationProvider.html5Mode(true);
     
     $routeProvider
         .when('/', { templateUrl: partialsDir + 'new.html' })
+        .when('/toprated', { templateUrl: partialsDir + 'toprated.html' })
         .when('/featured', { templateUrl: partialsDir + 'featured.html', controller: aachen.baseCtrl })
         .when('/categories', { templateUrl: partialsDir + 'categories.html' })
-        .when('/toprated', { templateUrl: partialsDir + 'toprated.html' })
+        .when('/bycategory/:id', { templateUrl: partialsDir + 'by-category.html' })
         .when('/add', { templateUrl: partialsDir + 'add.html' })
         .otherwise({ redirectTo: '/' });
 }]);

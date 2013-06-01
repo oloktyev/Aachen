@@ -1,2 +1,8 @@
-﻿<h1>Not implemented.</h1>
+﻿<div ng-controller="CategoriesController" ng-scroll="loadMore()">
+    <ul class="thumbnails" ng-controller="ContentController">
+        <li class="span5 aachen-joke" ng-repeat="item in categories">
+            <a href="/#bycategory/{{item.CategoryId}}">{{item.CategoryName}} ({{item.Count}})</a>
+        </li>
+    </ul>
+</div>
 

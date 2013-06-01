@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Base\Entity.cs" />
     <Compile Include="Base\Enums.cs" />
+    <Compile Include="DTO\CategoriesDTO.cs" />
     <Compile Include="DTO\LatestJokesDTO.cs" />
     <Compile Include="DTO\WebResourseDTO.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />

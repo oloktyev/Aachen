@@ -70,6 +70,50 @@ namespace Aachen.Infrastructure.Services
                        .Where(x => jokes.Contains(x.Id));
         }
 
+        public IList<CategoriesDTO> GetCategories()
+        {
+            var jokes = _uow.Jokes.GetAll().ToList();
+            var categories = _uow.Categories.GetAll().ToList().Select(x => new CategoriesDTO
+                                                                                {
+                                                                                    CategoryId = x.Id,
+                                                                                    CategoryName = x.Name,
+                                                                                    Count = 0
+                                                                                }).ToList();
+            foreach(var category in categories)
+                category.Count = jokes.Where(x => x.Categories.Contains(category.CategoryName)).Count();
+
+            var result = categories.OrderByDescending(x => x.Count).ToList();
+            result.Add(new CategoriesDTO
+            {
+                CategoryId = 0,
+                CategoryName = "Без категории",
+                Count = jokes.Where(x => string.IsNullOrEmpty(x.Categories)).Count()
+            });
+            return result;
+        }
+
+        public IList<Joke> GetByCategory(byte id, int first, int count)
+        {
+            if (first < 0 || count <= 0)
+                return Enumerable.Empty<Joke>().ToList();
+
+            var category = _uow.Categories.GetAll().FirstOrDefault(x => x.Id == id);
+            var result = category == null 
+                            ? _uow.Jokes.GetAll()
+                                    .Where(x => string.IsNullOrEmpty(x.Categories))
+                                    .OrderByDescending(x => x.Id)
+                                    .Skip(first)
+                                    .Take(count)
+                                    .ToList()
+                            : _uow.Jokes.GetAll()
+                                    .Where(x => x.Categories.Contains(category.Name))
+                                    .OrderByDescending(x => x.Id)
+                                    .Skip(first)
+                                    .Take(count)
+                                    .ToList();
+            return result;
+        }
+
         public IList<Joke> AddNewJokes()
         {
             var newJokes = new List<Joke>();
@@ -130,22 +174,10 @@ namespace Aachen.Infrastructure.Services
 		{
 			var jokes = _uow.Jokes.GetAll().ToList();
 			var categories = _uow.Categories.GetAll().ToList();
+            jokes = jokes.AddCategories(categories).ToList();
 			foreach (var joke in jokes)
 			{
-				var jokeCategory = string.Empty;
-				foreach (var words in categories.Select(category => category.Words.Split(';')))
-				{
-					foreach (var word in words)
-					{
-						if (joke.Description.Contains(word))
-						{
-							jokeCategory += string.Format(";{0}", word);
-							break;
-						}
-					}
-				}
-				joke.Categories = jokeCategory.Remove(1, 1);
-				_uow.Jokes.Update(joke);
+				//_uow.Jokes.Update(joke);
 			}
 			_uow.CommitChanges();
 			return jokes;

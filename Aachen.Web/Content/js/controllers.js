@@ -95,8 +95,37 @@ aachen.controllers.featured = function ($scope, $resource, Api, Storage) {
     $scope.loadMore();
 };
 
+aachen.controllers.categories = function ($scope, $resource, Api) {
+    if (!$scope.categories) {
+        aachen.controls.loading.show();
+        $scope.categories = [];
+        var items = Api.getAllCategories(function () {
+            $scope.categories = $scope.categories.concat(items);
+            aachen.controls.loading.hide();
+        });
+    }
+
+};
+
+aachen.controllers.byCategory = function ($scope, $routeParams, Api) {
+    $scope.items = [];
+
+    $scope.loadMore = function () {
+        aachen.controls.loading.show();
+        var items = Api.getByCategory({ id: $routeParams.id, first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
+            if (items.First === $scope.items.length)
+                $scope.items = $scope.items.concat(items.JokeList);
+            aachen.controls.loading.hide();
+        });
+    };
+
+    $scope.loadMore();
+};
+
 aachen.app.controller("BaseController", aachen.controllers.base);
 aachen.app.controller("ContentController", aachen.controllers.content);
 aachen.app.controller("NewController", aachen.controllers.newContent);
-aachen.app.controller("FeaturedController", aachen.controllers.featured);
 aachen.app.controller("TopRatedController", aachen.controllers.topRated);
+aachen.app.controller("FeaturedController", aachen.controllers.featured);
+aachen.app.controller("CategoriesController", aachen.controllers.categories);
+aachen.app.controller("ByCategoryController", aachen.controllers.byCategory);

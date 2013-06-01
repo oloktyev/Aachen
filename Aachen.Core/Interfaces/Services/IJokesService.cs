@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Aachen.Core.Model;
+using Aachen.Core.DTO;
 
 namespace Aachen.Core.Interfaces.Services
 {
@@ -18,9 +19,15 @@ namespace Aachen.Core.Interfaces.Services
 
         IQueryable<Joke> GetFeatured(IList<long> jokes);
 
+        IList<CategoriesDTO> GetCategories();
+
+        IList<Joke> GetByCategory(byte id, int first, int count);
+
         IList<Joke> AddNewJokes();
 
         IList<Joke> FixExistingJokes();
+
+        IList<Joke> RecalculateCategories();
 
         void IncrementRating(long jokeId);
 

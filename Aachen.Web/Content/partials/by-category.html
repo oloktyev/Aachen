@@ -1,8 +1,9 @@
-﻿<div ng-controller="FeaturedController" ng-scroll="loadMore()">
+﻿<div ng-controller="ByCategoryController" ng-scroll="loadMore()">
     <ul class="thumbnails" ng-controller="ContentController">
         <li class="span5 aachen-joke" 
-             ng-repeat="item in items"
-             ng-repeat-finished="alignContent()">
+            ng-repeat="item in items"
+            ng-repeat-finished="alignContent()">
+            <h4>{{item.Category}}</h4>
             <div ng-bind-html="item.Description" class="aachen-joke-content"></div>
             <br/>
             <a ng-href="{{item.ResourceUrl}}" ng-bind-html="item.ResourceName" target="_blank"></a>
@@ -13,10 +14,13 @@
                 <span class="btn disabled">{{item.Rating}}</span>
                 <button class="btn" ng-click="updateRating(item, -1)">-</button>
             </div>
+            
             <div ng-switch on="featured.indexOf(item.Id) >= 0" >
                 <a ng-switch-when="false" class="btn" ng-click="addFeatured(item)"><div class="featured"></div></a>
                 <a ng-switch-when="true" class="btn" ng-click="removeFeatured(item)"><div class="not-featured"></div></a>
             </div>
+            
         </li>
     </ul>
 </div>
+

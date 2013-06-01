@@ -7,6 +7,7 @@ using Aachen.Core.Interfaces;
 using Aachen.Core.Interfaces.Services;
 using Aachen.Infrastructure.Services;
 using Aachen.Web.ViewModels;
+using Aachen.Core.DTO;
 
 namespace Aachen.Web.Controllers
 {
@@ -37,7 +38,8 @@ namespace Aachen.Web.Controllers
                         ResourceName = x.Resource.Name,
                         ResourceUrl = x.Resource.Url,
                         Rating = x.Rating,
-                        CreatedDate = x.CreatedDate
+                        CreatedDate = x.CreatedDate,
+                        Category = x.Categories
                     })
                 .ToList();
 
@@ -93,6 +95,34 @@ namespace Aachen.Web.Controllers
                 _jokesService.IncrementRating(jokeId);
             else if (value < 0)
                 _jokesService.DecrementRating(jokeId);
+        }
+
+        public IList<CategoriesDTO> GetAllCategories()
+        {
+            var categories = _jokesService.GetCategories();
+            return categories;
+        }
+
+        public JokeListViewModel GetByCategory(byte id, int first, int count)
+        {
+            var jokeList = _jokesService.GetByCategory(id, first, count)
+                .Select(x => new JokeViewModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    ResourceName = x.Resource.Name,
+                    ResourceUrl = x.Resource.Url,
+                    Rating = x.Rating,
+                    CreatedDate = x.CreatedDate,
+                    Category = x.Categories
+                })
+                .ToList();
+
+            return new JokeListViewModel
+            {
+                JokeList = jokeList,
+                First = first
+            };
         }
     }
 }

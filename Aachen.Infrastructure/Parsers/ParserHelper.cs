@@ -54,18 +54,17 @@ namespace Aachen.Infrastructure.Parsers
 			foreach(var joke in jokes)
 			{
 				var jokeCategory = string.Empty;
-				foreach (var words in categories.Select(category => category.Words.Split(';')))
+				foreach (var category in categories)
 				{
-					foreach (var word in words)
-					{
-						if (joke.Description.Contains(word))
-						{
-							jokeCategory += string.Format(";{0}", word);
-							break;
-						}
-					}
+				    var words = category.Words.Split(';');
+				    if (words.Any(word => joke.Description.ToUpper().Contains(word.ToUpper())))
+				    {
+				        jokeCategory += string.Format(";{0}", category.Name);
+				    }
 				}
-				joke.Categories = jokeCategory.Remove(1, 1);
+			    if (jokeCategory != string.Empty)
+			        jokeCategory = jokeCategory.Remove(0, 1);
+				joke.Categories = jokeCategory;
 			}
 			return jokes;
 		}

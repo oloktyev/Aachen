@@ -160,6 +160,7 @@
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\star-sprite.png" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\masonry.js" />
     <Content Include="Content\js\directives.js" />
@@ -167,6 +168,7 @@
     <Content Include="Content\js\storage.js" />
     <Content Include="Content\partials\categories.html" />
     <Content Include="Content\partials\add.html" />
+    <Content Include="Content\partials\by-category.html" />
     <Content Include="Content\partials\toprated.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

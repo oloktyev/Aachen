@@ -57,3 +57,16 @@ hr {
     text-align: center; 
     display: none;
 }
+
+.featured {
+    background: url("../images/star-sprite.png") no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.not-featured {
+    background: url("../images/star-sprite.png") no-repeat;
+    background-position-y: -28px;
+    width: 20px;
+    height: 20px;
+}

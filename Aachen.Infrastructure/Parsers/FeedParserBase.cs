@@ -66,7 +66,8 @@ namespace Aachen.Infrastructure.Parsers
                                                                 @"onblur",
                                                                 @"onfocus",
                                                                 @"onload",
-                                                                @"onunload"
+                                                                @"onunload",
+                                                                @"<img"
                                                             };
 
         public abstract List<string> Parse(string url);
