@@ -20,7 +20,7 @@ namespace Aachen.Infrastructure.Parsers
                     var descriptionNodes = xDcoument.DocumentElement.SelectNodes("channel/item/description").Cast<XmlNode>();
                     result = descriptionNodes.Select(x => x.InnerText.Trim().Replace(@"<p>", "").Replace(@"</p>", "")).ToList();
                 }
-                foreach (var s in from tag in dangerousTags from s in result where s.ToUpper().Contains(tag) select s)
+                foreach (var s in from tag in dangerousTags from s in result where s.ToUpper().Contains(tag.ToUpper()) select s)
                 {
                     System.Diagnostics.Debug.WriteLine(s);
                     result.Remove(s);

@@ -1,25 +1,26 @@
 ﻿aachen.config = {
-    itemsPerPage: 20
+    itemsPerPage: 20,
+
 };
 
 aachen.controls = {
-    loading: $('#aachen-loading')
+    loading: $('#aachen-loading'),
+    topMenu: $('.aachen-top-menu')
 }
 
 aachen.controllers = aachen.controllers || {};
 
 aachen.controllers.base = function ($scope, $location) {
     $scope.activePath = null;
-    
+
     $scope.$on('$routeChangeSuccess', function () {
+        aachen.controls.topMenu.collapse('hide');
         $scope.activePath = $location.path();
     });
 };
+aachen.controllers.base.$inject = ['$scope', '$location'];
 
-aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
-    Masonry.init();
-
-    $scope.alignContent = Masonry.alignContent;
+aachen.controllers.content = function ($scope, Api, Storage) {
     $scope.featured = Storage.star.get();
 
     $scope.updateRating = function (item, value) {
@@ -29,7 +30,7 @@ aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
             Api.updateRating({ jokeId: item.Id, value: value });
         }
     };
-    
+
     $scope.addFeatured = function (item) {
         if (!Storage.star.contains(item.Id)) {
             Storage.star.put(item.Id);
@@ -37,7 +38,7 @@ aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
         }
 
     };
-    
+
     $scope.removeFeatured = function (item) {
         if (Storage.star.contains(item.Id)) {
             Storage.star.deleteItem(item.Id);
@@ -45,10 +46,11 @@ aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
         }
     };
 };
+aachen.controllers.content.$inject = ['$scope', 'Api', 'Storage'];
 
 aachen.controllers.newContent = function ($scope, Api) {
     $scope.items = [];
-    
+
     $scope.loadMore = function () {
         aachen.controls.loading.show();
         var items = Api.getNew({ first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
@@ -57,9 +59,10 @@ aachen.controllers.newContent = function ($scope, Api) {
             aachen.controls.loading.hide();
         });
     };
-    
+
     $scope.loadMore();
 };
+aachen.controllers.newContent.$inject = ['$scope', 'Api'];
 
 aachen.controllers.topRated = function ($scope, $resource, Api) {
     $scope.items = [];
@@ -75,16 +78,17 @@ aachen.controllers.topRated = function ($scope, $resource, Api) {
 
     $scope.loadMore();
 };
+aachen.controllers.topRated.$inject = ['$scope', '$resource', 'Api'];
 
 aachen.controllers.featured = function ($scope, $resource, Api, Storage) {
     $scope.items = [];
 
     $scope.loadMore = function () {
         var jokeIds = Storage.star.get().slice($scope.items.length, aachen.config.itemsPerPage);
-        if (jokeIds.length > 0) {
+        if (jokeIds.length > 0 && jokeIds.length > $scope.items.length) {
             aachen.controls.loading.show();
             var obj = { jokes: jokeIds, first: $scope.items.length };
-            var items = Api.getFeatured(obj, function() {
+            var items = Api.getFeatured(obj, function () {
                 if (items.First === $scope.items.length)
                     $scope.items = $scope.items.concat(items.JokeList);
                 aachen.controls.loading.hide();
@@ -94,6 +98,7 @@ aachen.controllers.featured = function ($scope, $resource, Api, Storage) {
 
     $scope.loadMore();
 };
+aachen.controllers.featured.$inject = ['$scope', '$resource', 'Api', 'Storage'];
 
 aachen.controllers.categories = function ($scope, $resource, Api) {
     if (!$scope.categories) {
@@ -106,6 +111,7 @@ aachen.controllers.categories = function ($scope, $resource, Api) {
     }
 
 };
+aachen.controllers.categories.$inject = ['$scope', '$resource', 'Api'];
 
 aachen.controllers.byCategory = function ($scope, $routeParams, Api) {
     $scope.items = [];
@@ -121,8 +127,9 @@ aachen.controllers.byCategory = function ($scope, $routeParams, Api) {
 
     $scope.loadMore();
 };
+aachen.controllers.byCategory.$inject = ['$scope', '$routeParams', 'Api'];
 
-aachen.controllers.MobileNew = function ($scope, Api) {
+aachen.controllers.mobileNew = function ($scope, Api) {
     $scope.items = [];
     $scope.cnt = 0;
     $scope.loadMore = function () {
@@ -139,6 +146,7 @@ aachen.controllers.MobileNew = function ($scope, Api) {
 
     $scope.loadMore();
 };
+aachen.controllers.mobileNew.$inject = ['$scope', 'Api'];
 
 aachen.app.controller("BaseController", aachen.controllers.base);
 aachen.app.controller("ContentController", aachen.controllers.content);
@@ -147,4 +155,4 @@ aachen.app.controller("TopRatedController", aachen.controllers.topRated);
 aachen.app.controller("FeaturedController", aachen.controllers.featured);
 aachen.app.controller("CategoriesController", aachen.controllers.categories);
 aachen.app.controller("ByCategoryController", aachen.controllers.byCategory);
-aachen.app.controller("MobileController", aachen.controllers.MobileNew);
+aachen.app.controller("MobileController", aachen.controllers.mobileNew);

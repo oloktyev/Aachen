@@ -78,6 +78,13 @@ hr {
     height: 20px;
 }
 
-@media (max-width: 940px) {
+.aachen-hidden {
+    display: none;
+}
 
+@media (max-width: 979px) {
+    .aachen-content {
+        margin: auto;
+        width: 332px;
+    }
 }

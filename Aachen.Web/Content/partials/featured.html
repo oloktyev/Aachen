@@ -1,4 +1,5 @@
 ﻿<div ng-controller="FeaturedController" ng-scroll="loadMore()">
+    <h4 ng-class="{ aachen-hidden: items.length > 0 }">Нет избранных шуток.</h4>
     <ul class="thumbnails" ng-controller="ContentController">
         <li class="span5 aachen-joke" 
              ng-repeat="item in items"

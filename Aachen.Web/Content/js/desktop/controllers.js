@@ -15,6 +15,7 @@ aachen.controllers.base = function ($scope, $location) {
         $scope.activePath = $location.path();
     });
 };
+aachen.controllers.base.$inject = ['$scope', '$location'];
 
 aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
     Masonry.init();
@@ -45,6 +46,7 @@ aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
         }
     };
 };
+aachen.controllers.content.$inject = ['$scope', 'Api', 'Storage', 'Masonry'];
 
 aachen.controllers.newContent = function ($scope, Api) {
     $scope.items = [];
@@ -60,6 +62,7 @@ aachen.controllers.newContent = function ($scope, Api) {
     
     $scope.loadMore();
 };
+aachen.controllers.newContent.$inject = ['$scope', 'Api'];
 
 aachen.controllers.topRated = function ($scope, $resource, Api) {
     $scope.items = [];
@@ -75,6 +78,7 @@ aachen.controllers.topRated = function ($scope, $resource, Api) {
 
     $scope.loadMore();
 };
+aachen.controllers.topRated.$inject = ['$scope', '$resource', 'Api'];
 
 aachen.controllers.featured = function ($scope, $resource, Api, Storage) {
     $scope.items = [];
@@ -94,6 +98,7 @@ aachen.controllers.featured = function ($scope, $resource, Api, Storage) {
 
     $scope.loadMore();
 };
+aachen.controllers.featured.$inject = ['$scope', '$resource', 'Api', 'Storage'];
 
 aachen.controllers.categories = function ($scope, $resource, Api) {
     if (!$scope.categories) {
@@ -106,6 +111,7 @@ aachen.controllers.categories = function ($scope, $resource, Api) {
     }
 
 };
+aachen.controllers.categories.$inject = ['$scope', '$resource', 'Api'];
 
 aachen.controllers.byCategory = function ($scope, $routeParams, Api) {
     $scope.items = [];
@@ -121,8 +127,9 @@ aachen.controllers.byCategory = function ($scope, $routeParams, Api) {
 
     $scope.loadMore();
 };
+aachen.controllers.byCategory.$inject = ['$scope', '$routeParams', 'Api'];
 
-aachen.controllers.MobileNew = function ($scope, Api) {
+aachen.controllers.mobileNew = function ($scope, Api) {
     $scope.items = [];
     $scope.cnt = 0;
     $scope.loadMore = function () {
@@ -139,8 +146,7 @@ aachen.controllers.MobileNew = function ($scope, Api) {
 
     $scope.loadMore();
 };
-
-aachen.controllers.MobileNew.$inject = ['$scope', 'Api'];
+aachen.controllers.mobileNew.$inject = ['$scope', 'Api'];
 
 aachen.app.controller("BaseController", aachen.controllers.base);
 aachen.app.controller("ContentController", aachen.controllers.content);
@@ -149,4 +155,4 @@ aachen.app.controller("TopRatedController", aachen.controllers.topRated);
 aachen.app.controller("FeaturedController", aachen.controllers.featured);
 aachen.app.controller("CategoriesController", aachen.controllers.categories);
 aachen.app.controller("ByCategoryController", aachen.controllers.byCategory);
-aachen.app.controller("MobileController", aachen.controllers.MobileNew);
+aachen.app.controller("MobileController", aachen.controllers.mobileNew);

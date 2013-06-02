@@ -25,8 +25,6 @@ module.exports = function(grunt) {
 			mobile: {
                 src: [
 						'../../../Scripts/Libs/Jquery/jquery-2.0.1.js',
-                        '../../../Scripts/Libs/Jquery/jquery.masonry.js',
-                        '../../../Scripts/Libs/Jquery/jquery.imagesloaded.js',
                         '../../../Scripts/Libs/Bootstrap/bootstrap-collapse.js',
                         '../../../Scripts/Libs/Angular/angular.js',
                         '../../../Scripts/Libs/Angular/angular-resource.js',
@@ -68,6 +66,6 @@ module.exports = function(grunt) {
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     // Задача по умолчанию
-    grunt.registerTask('default', ['concat', 'uglify', 'concat', 'watch']);
+    grunt.registerTask('default', ['concat', 'uglify', 'watch']);
     grunt.registerTask('debug', ['concat']);
 };

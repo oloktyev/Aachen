@@ -175,7 +175,6 @@
     <Content Include="Content\js\mobile\app.js" />
     <Content Include="Content\js\mobile\controllers.js" />
     <Content Include="Content\js\mobile\directives.js" />
-    <Content Include="Content\js\mobile\masonry.js" />
     <Content Include="Content\js\mobile\release\aachen-mobile.js" />
     <Content Include="Content\js\mobile\release\aachen-mobile.min.js" />
     <Content Include="Content\js\mobile\resources.js" />

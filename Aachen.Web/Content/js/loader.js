@@ -6,7 +6,7 @@
         document.getElementsByTagName("head")[0].appendChild(script);
     }
 
-    if (document.documentElement.clientWidth >= 940)
+    if (document.documentElement.clientWidth >= 979)
         loadScript('/content/js/desktop/release/aachen-desktop.js');
     else
         loadScript('/content/js/mobile/release/aachen-mobile.js')

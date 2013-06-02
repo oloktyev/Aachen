@@ -39,7 +39,7 @@ namespace Aachen.Web.Controllers
                         ResourceUrl = x.Resource.Url,
                         Rating = x.Rating,
                         CreatedDate = x.CreatedDate,
-                        Category = x.Categories
+                        Category = x.Categories.Replace(";", ", ")
                     })
                 .ToList();
 
@@ -59,7 +59,8 @@ namespace Aachen.Web.Controllers
                     Description = x.Description,
                     ResourceName = x.Resource.Name,
                     ResourceUrl = x.Resource.Url,
-                    Rating = x.Rating
+                    Rating = x.Rating,
+                    Category = x.Categories.Replace(";", ", ")
                 })
                 .ToList();
             return new JokeListViewModel
@@ -78,7 +79,8 @@ namespace Aachen.Web.Controllers
                     Description = x.Description,
                     ResourceName = x.Resource.Name,
                     ResourceUrl = x.Resource.Url,
-                    Rating = x.Rating
+                    Rating = x.Rating,
+                    Category = x.Categories.Replace(";", ", ")
                 })
                 .ToList();
 
@@ -114,7 +116,7 @@ namespace Aachen.Web.Controllers
                     ResourceUrl = x.Resource.Url,
                     Rating = x.Rating,
                     CreatedDate = x.CreatedDate,
-                    Category = x.Categories
+                    Category = x.Categories.Replace(";", ", ")
                 })
                 .ToList();
 
