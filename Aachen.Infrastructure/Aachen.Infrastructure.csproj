@@ -58,7 +58,6 @@
     <Compile Include="EF\JokeRepository.cs" />
     <Compile Include="Logging\Log4NetLogger .cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\NLogLogger .cs" />
     <Compile Include="Parsers\FeedParserBase.cs" />
     <Compile Include="Parsers\ParserHelper.cs" />
     <Compile Include="Parsers\RssParser.cs" />

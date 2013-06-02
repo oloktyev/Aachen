@@ -19,6 +19,7 @@ namespace Aachen.Web.App_Start
 
             bundles.Add(new ScriptBundle("~/aachen/js").Include(
                         "~/Scripts/Libs/Jquery/jquery-1.9.1.js",
+                        "~/Scripts/Libs/Bootstrap/bootstrap-collapse.js",
                         "~/Scripts/Libs/Jquery/jquery.masonry.js",
                         "~/Scripts/Libs/Jquery/jquery.imagesloaded.js",
                         "~/Scripts/Libs/Angular/angular.js",

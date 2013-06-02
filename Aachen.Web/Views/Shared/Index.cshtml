@@ -13,6 +13,11 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="brand" href="#">Лангуст</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
@@ -20,6 +25,7 @@
                         <li ng-class="{ active: activePath=='/toprated' }"><a href="/#toprated">Лучшие</a></li>
                         <li ng-class="{ active: activePath=='/featured' }"><a href="/#featured">Избранное</a></li>
                         <li ng-class="{ active: activePath=='/categories' || activePath=='/bycategory' }"><a href="/#categories">По категориям</a></li>
+                        <li ng-class="{ active: activePath=='/mobile' }"><a href="/#mobile">Мобайл</a></li>
                         <!--<li ng-class="{ active: activePath=='/add' }"><a href="#add">Добавить</a></li>-->
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -40,8 +46,8 @@
             </div>
         </footer>
     </div>
-    
-    @Scripts.Render("~/aachen/js")
+
+    <script src="~/Content/js/loader.js"></script>
 </body>
 </html>
 

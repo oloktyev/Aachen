@@ -1,6 +1,7 @@
-﻿body {
+﻿
+body {
     background-color: #f5f5f5;
-    background-image: url('http://cdn.jojari.com/images/jojari/body-speckle.gif');
+    background-image: url('../images/background.gif');
 }
 
 footer {
@@ -47,7 +48,8 @@ hr {
     bottom: 40px; 
     color: #FFFFFF; 
     height: 100px; 
-    left: 40%; 
+    left: 50%; 
+    margin-left: -100px;
     opacity: 0.8; 
     padding: 10px; 
     position: fixed; 
@@ -56,6 +58,11 @@ hr {
     border-radius: 10px; 
     text-align: center; 
     display: none;
+}
+
+.featured-container {
+    float: left;
+    margin-right: 5px;
 }
 
 .featured {
@@ -69,4 +76,8 @@ hr {
     background-position-y: -28px;
     width: 20px;
     height: 20px;
+}
+
+@media (max-width: 940px) {
+
 }
