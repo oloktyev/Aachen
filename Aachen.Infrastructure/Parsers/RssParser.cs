@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using Aachen.Infrastructure.Logging;
 
 namespace Aachen.Infrastructure.Parsers
 {
     public class RssParser : FeedParserBase
     {
+        private static readonly ILogger _logger = new Log4NetLogger();
+
         #region IFeedParser Members
 
         public override List<string> Parse(string url)
@@ -22,12 +26,12 @@ namespace Aachen.Infrastructure.Parsers
                 }
                 foreach (var s in from tag in dangerousTags from s in result where s.ToUpper().Contains(tag.ToUpper()) select s)
                 {
-                    System.Diagnostics.Debug.WriteLine(s);
                     result.Remove(s);
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                _logger.ErrorException("Failed to parse resource.", ex);
             }
             return result;
         }

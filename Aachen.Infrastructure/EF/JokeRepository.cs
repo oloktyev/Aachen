@@ -37,5 +37,16 @@ namespace Aachen.Infrastructure.EF
 	                        rn = 1").ToList();
             return latestJokes;
         }
+
+        public void RemoveDuplicates()
+        {
+            DbContext.Database.ExecuteSqlCommand(
+                       @"WITH numbered AS 
+                        ( 
+                             SELECT Description, row_number() OVER ( PARTITION BY Description ORDER BY Description ) AS RN 
+                             FROM     [Joke]
+                        )
+                        delete FROM numbered WHERE RN > 1");
+        }
     }
 }

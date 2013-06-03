@@ -8,5 +8,7 @@ namespace Aachen.Core.Interfaces.Repositories
     public interface IJokeRepository : IRepository<Joke, long>
     {
         IList<LatestJokesDTO> GetLatestJokes();
+
+        void RemoveDuplicates();
     }
 }

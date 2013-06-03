@@ -144,6 +144,7 @@ namespace Aachen.Infrastructure.Services
             {
                 _uow.Jokes.AddMany(newJokes.OrderBy(x => x.Description[3]).ToList());
                 _uow.CommitChanges();
+                _uow.Jokes.RemoveDuplicates();
             }
             return newJokes;
         }
