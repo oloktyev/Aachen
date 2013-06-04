@@ -11,6 +11,11 @@
                 <span class="btn disabled">{{item.Rating}}</span>
                 <button class="btn" ng-click="updateRating(item, -1)">-</button>
             </div>
+
+			<div ng-switch on="featured.indexOf(item.Id) >= 0" >
+                <a ng-switch-when="false" class="btn" ng-click="addFeatured(item)"><div class="featured"></div></a>
+                <a ng-switch-when="true" class="btn" ng-click="removeFeatured(item)"><div class="not-featured"></div></a>
+            </div>
         </li>
     </ul>
 </div>

@@ -173,6 +173,7 @@
     <Content Include="Content\js\desktop\resources.js" />
     <Content Include="Content\js\desktop\storage.js" />
     <Content Include="Content\js\loader.js" />
+    <Content Include="Content\js\mobile\cacheFactory.js" />
     <Content Include="Content\js\mobile\app.js" />
     <Content Include="Content\js\mobile\controllers.js" />
     <Content Include="Content\js\mobile\directives.js" />
