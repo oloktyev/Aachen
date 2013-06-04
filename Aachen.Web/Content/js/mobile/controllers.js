@@ -12,8 +12,11 @@ aachen.controllers = aachen.controllers || {};
 aachen.controllers.base = function ($scope, $location) {
     $scope.activePath = null;
 
-    $scope.$on('$routeChangeSuccess', function () {
+    $scope.$on('$routeChangeStart', function () {
         aachen.controls.topMenu.collapse('hide');
+    });
+    
+    $scope.$on('$routeChangeSuccess', function () {
         $scope.activePath = $location.path();
     });
 };
