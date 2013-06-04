@@ -49,21 +49,32 @@ aachen.controllers.content = function ($scope, Api, Storage, Masonry) {
 };
 aachen.controllers.content.$inject = ['$scope', 'Api', 'Storage', 'Masonry'];
 
-aachen.controllers.newContent = function ($scope, Api) {
+aachen.controllers.newContent = function ($scope, Api, CacheFactory) {
     $scope.items = [];
-    
+    $scope.counter = 1;
+
     $scope.loadMore = function () {
-        aachen.controls.loading.show();
-        var items = Api.getNew({ first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
-            if (items.First === $scope.items.length)
-                $scope.items = $scope.items.concat(items.JokeList);
-            aachen.controls.loading.hide();
-        });
+        var cachedItems = CacheFactory.get('new');
+        if (cachedItems && cachedItems.lenth >= $scope.counter * aachen.config.itemsPerPage) {
+            $scope.items = $scope.items.slice(($scope.counter - 1) * aachen.config.itemsPerPage, $scope.counter * aachen.config.itemsPerPage);
+            $scope.counter++;
+        }
+        else {
+            aachen.controls.loading.show();
+            var items = Api.getNew({ first: $scope.items.length, count: aachen.config.itemsPerPage }, function () {
+                if (items.First === $scope.items.length) {
+                    $scope.items = $scope.items.concat(items.JokeList);
+                    CacheFactory.put('new', $scope.items);
+                }
+                $scope.counter++;
+                aachen.controls.loading.hide();
+            });
+        }
     };
-    
+
     $scope.loadMore();
 };
-aachen.controllers.newContent.$inject = ['$scope', 'Api'];
+aachen.controllers.newContent.$inject = ['$scope', 'Api', 'CacheFactory'];
 
 aachen.controllers.topRated = function ($scope, $resource, Api) {
     $scope.items = [];
