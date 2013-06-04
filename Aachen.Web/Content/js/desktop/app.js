@@ -5,8 +5,7 @@ aachen.app.config(['$routeProvider', '$locationProvider', function ($routeProvid
 
     var partialsDir = 'content/partials/';
     
-    //$locationProvider.hashPrefix('!');
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true).hashPrefix('!');
     
     $routeProvider
         .when('/', { templateUrl: partialsDir + 'new.html' })
@@ -14,7 +13,7 @@ aachen.app.config(['$routeProvider', '$locationProvider', function ($routeProvid
         .when('/toprated', { templateUrl: partialsDir + 'toprated.html' })
         .when('/featured', { templateUrl: partialsDir + 'featured.html', controller: aachen.baseCtrl })
         .when('/categories', { templateUrl: partialsDir + 'categories.html' })
-        .when('/bycategory/:id', { templateUrl: partialsDir + 'by-category.html' })
+        .when('/bycategory/:id', { templateUrl: '../' + partialsDir + 'by-category.html' })
         .when('/add', { templateUrl: partialsDir + 'add.html' })
         .otherwise({ redirectTo: '/' });
 }]);

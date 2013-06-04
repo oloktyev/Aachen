@@ -1,12 +1,11 @@
 ﻿aachen.config = {
-    itemsPerPage: 20,
-
+    itemsPerPage: 20
 };
 
 aachen.controls = {
     loading: $('#aachen-loading'),
     topMenu: $('.aachen-top-menu')
-}
+};
 
 aachen.controllers = aachen.controllers || {};
 

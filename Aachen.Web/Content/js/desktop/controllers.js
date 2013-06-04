@@ -4,7 +4,7 @@
 
 aachen.controls = {
     loading: $('#aachen-loading')
-}
+};
 
 aachen.controllers = aachen.controllers || {};
 
@@ -14,6 +14,7 @@ aachen.controllers.base = function ($scope, $location) {
     $scope.$on('$routeChangeSuccess', function () {
         $scope.activePath = $location.path();
     });
+
 };
 aachen.controllers.base.$inject = ['$scope', '$location'];
 
