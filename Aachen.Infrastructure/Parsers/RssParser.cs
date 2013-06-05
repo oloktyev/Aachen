@@ -16,6 +16,7 @@ namespace Aachen.Infrastructure.Parsers
         {
             var xDcoument = new XmlDocument();
             var results = new List<string>();
+			var validResults = new List<string>();
             try
             {
                 xDcoument.Load(url);
@@ -24,19 +25,19 @@ namespace Aachen.Infrastructure.Parsers
                     var descriptionNodes = xDcoument.DocumentElement.SelectNodes("channel/item/description").Cast<XmlNode>();
                     results = descriptionNodes.Select(x => x.InnerText.Trim().Replace(@"<p>", "").Replace(@"</p>", "")).ToList();
                 }
-				foreach(var tag in dangerousTags)
-					foreach(var result in results)
-						if(result.ToUpper().Contains(tag.ToUpper()))
-						{
+
+				foreach (var tag in dangerousTags)
+					foreach (var result in results)
+						if (!result.ToUpper().Contains(tag.ToUpper()))
+							validResults.Add(result);
+						else
 							_logger.Info(string.Format("Removing joke {0}./n Dangerous tag: {1}", result, tag));
-							results.Remove(result);
-						}
             }
             catch(Exception ex)
             {
                 _logger.ErrorException(string.Format("Failed to parse resource: {0}", url), ex);
             }
-            return results;
+			return validResults;
         }
 
         #endregion

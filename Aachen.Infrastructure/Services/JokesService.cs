@@ -162,9 +162,7 @@ namespace Aachen.Infrastructure.Services
                                                   .Apply(currentJoke.Description, rule.Argument);
                 
                 if(string.IsNullOrEmpty(currentJoke.Description))
-                     _uow.Jokes.Delete(currentJoke);
-                else 
-                    _uow.Jokes.Update(currentJoke);
+					jokes.Remove(currentJoke);
             }
 
             _uow.CommitChanges();

@@ -15,7 +15,9 @@ namespace Aachen.Core.Base
         public enum ResourceProcessingRule
         {
             RemoveFrom = 1,
-            Replace = 2
+			Replace = 2,
+			RemoveBeginning = 3,
+			RemoveEnd = 4,
         }
     }
 }

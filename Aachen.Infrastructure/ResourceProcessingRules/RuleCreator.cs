@@ -17,6 +17,10 @@ namespace Aachen.Infrastructure.ResourceProcessingRules
                     return new RemoveFromRule();
                 case Enums.ResourceProcessingRule.Replace:
                     return new ReplaceRule();
+				case Enums.ResourceProcessingRule.RemoveBeginning:
+					return new RemoveBeginningRule();
+				case Enums.ResourceProcessingRule.RemoveEnd:
+					return new RemoveEndRule();
                 default:
                     throw new NotImplementedException();
             }
