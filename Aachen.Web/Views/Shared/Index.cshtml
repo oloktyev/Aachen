@@ -4,8 +4,10 @@
 <html lang="en" ng-app="aachen.app">
 <head>
     <meta charset="utf-8">
+	<meta name="fragment" content="!" />
     <title>Лангуст - лучшие анекдоты</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="АkFYUECN - самые смешные анекдоты, новые приколы, истории из жизни, афоризмы и другой юмор.">
+	<meta name="Keywords" content="анекдоты, новые анекдоты, лучшие анекдоты, свежие анекдоты, смешные анекдоты, прикольные анекдоты, анекдоты онлайн, читать анекдоты, смех, юмор, приколы, развлечения">
     @Styles.Render("~/aachen/css")      
 </head>
     
@@ -21,11 +23,11 @@
                 <a class="brand" href="#">Лангуст</a>
                 <div class="nav-collapse collapse aachen-top-menu">
                     <ul class="nav">
-                        <li ng-class="{ active: activePath=='/' }"><a href="/">Новые</a></li>
-                        <li ng-class="{ active: activePath=='/toprated' }"><a href="/toprated">Лучшие</a></li>
-                        <li ng-class="{ active: activePath=='/featured' }"><a href="/featured">Избранное</a></li>
-                        <li ng-class="{ active: activePath=='/categories' || activePath=='/bycategory' }"><a href="/categories">По категориям</a></li>
-                        <li ng-class="{ active: activePath=='/mobile' }"><a href="/mobile">Мобайл</a></li>
+                        <li ng-class="{ active: activePath=='/' }"><a href="/" title="Новые анекдоты">Новые</a></li>
+                        <li ng-class="{ active: activePath=='/toprated' }" ><a href="/toprated" title="Лучшие анекдоты">Лучшие</a></li>
+                        <li ng-class="{ active: activePath=='/featured' }"><a href="/featured" title="Избранные анекдоты">Избранное</a></li>
+                        <li ng-class="{ active: activePath=='/categories' || activePath.indexOf('/bycategory') !== -1}"><a href="/categories" title="Анекдоты по категориям">По категориям</a></li>
+                        <li ng-class="{ active: activePath=='/mobile' }"><a href="/mobile" title="Анекдоты для мобильного">Мобайл</a></li>
                         <!--<li ng-class="{ active: activePath=='/add' }"><a href="#add">Добавить</a></li>-->
                     </ul>
                 </div><!--/.nav-collapse -->

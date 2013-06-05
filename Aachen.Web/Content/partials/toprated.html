@@ -4,7 +4,6 @@
              ng-repeat="item in items"
              ng-repeat-finished="alignContent()">
             <div ng-bind-html="item.Description" class="aachen-joke-content"></div>
-            <!--<a ng-href="{{item.ResourceUrl}}" ng-bind-html="item.ResourceName" target="_blank"></a>-->
             <hr/>
             <div class="aachen-rating">
                 <a class="btn" ng-click="updateRating(item, 1)">+</a>
@@ -13,8 +12,8 @@
             </div>
 
 			<div ng-switch on="featured.indexOf(item.Id) >= 0" >
-                <a ng-switch-when="false" class="btn" ng-click="addFeatured(item)"><div class="featured"></div></a>
-                <a ng-switch-when="true" class="btn" ng-click="removeFeatured(item)"><div class="not-featured"></div></a>
+                <a ng-switch-when="false" class="btn" ng-click="addFeatured(item)" title="Добавить в избранное"><div class="featured"></div></a>
+                <a ng-switch-when="true" class="btn" ng-click="removeFeatured(item)" title="Убрать из избранного"><div class="not-featured"></div></a>
             </div>
         </li>
     </ul>

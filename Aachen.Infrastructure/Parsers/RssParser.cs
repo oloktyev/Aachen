@@ -15,25 +15,28 @@ namespace Aachen.Infrastructure.Parsers
         public override List<string> Parse(string url)
         {
             var xDcoument = new XmlDocument();
-            var result = new List<string>();
+            var results = new List<string>();
             try
             {
                 xDcoument.Load(url);
                 if (xDcoument.DocumentElement != null)
                 {
                     var descriptionNodes = xDcoument.DocumentElement.SelectNodes("channel/item/description").Cast<XmlNode>();
-                    result = descriptionNodes.Select(x => x.InnerText.Trim().Replace(@"<p>", "").Replace(@"</p>", "")).ToList();
+                    results = descriptionNodes.Select(x => x.InnerText.Trim().Replace(@"<p>", "").Replace(@"</p>", "")).ToList();
                 }
-                foreach (var s in from tag in dangerousTags from s in result where s.ToUpper().Contains(tag.ToUpper()) select s)
-                {
-                    result.Remove(s);
-                }
+				foreach(var tag in dangerousTags)
+					foreach(var result in results)
+						if(result.ToUpper().Contains(tag.ToUpper()))
+						{
+							_logger.Info(string.Format("Removing joke {0}./n Dangerous tag: {1}", result, tag));
+							results.Remove(result);
+						}
             }
             catch(Exception ex)
             {
-                _logger.ErrorException("Failed to parse resource.", ex);
+                _logger.ErrorException(string.Format("Failed to parse resource: {0}", url), ex);
             }
-            return result;
+            return results;
         }
 
         #endregion

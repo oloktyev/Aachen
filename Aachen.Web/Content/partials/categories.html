@@ -1,7 +1,7 @@
 ﻿<div ng-controller="CategoriesController" ng-scroll="loadMore()">
     <ul class="thumbnails" ng-controller="ContentController">
         <li class="span5 aachen-joke" ng-repeat="item in categories">
-            <a href="/bycategory/{{item.CategoryId}}">{{item.CategoryName}} ({{item.Count}})</a>
+            <a href="/bycategory/{{item.CategoryId}}" title="{{item.CategoryName}}">{{item.CategoryName}} ({{item.Count}})</a>
         </li>
     </ul>
 </div>

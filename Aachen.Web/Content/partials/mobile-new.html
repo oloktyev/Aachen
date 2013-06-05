@@ -4,8 +4,6 @@
             <h4>{{items[cnt].Category}}</h4>
             <div ng-bind-html="items[cnt].Description" class="aachen-joke-content"></div>
             <br/>
-            <a ng-href="{{items[cnt].ResourceUrl}}" ng-bind-html="items[cnt].ResourceName" target="_blank"></a>
-            <span ng-bind-html="  items[cnt].CreatedDate"></span>
             <hr/>
             <div class="aachen-rating">
                 <a class="btn" ng-click="updateRating(items[cnt], 1)">+</a>
@@ -14,8 +12,8 @@
             </div>
             
             <div class="featured-container" ng-switch on="featured.indexOf(items[cnt].Id) >= 0" >
-                <a ng-switch-when="false" class="btn" ng-click="addFeatured(items[cnt])"><div class="featured"></div></a>
-                <a ng-switch-when="true" class="btn" ng-click="removeFeatured(items[cnt])"><div class="not-featured"></div></a>
+                <a ng-switch-when="false" class="btn" ng-click="addFeatured(items[cnt])" title="Добавить в избранное"><div class="featured"></div></a>
+                <a ng-switch-when="true" class="btn" ng-click="removeFeatured(items[cnt])" title="Убрать из избранного"><div class="not-featured"></div></a>
             </div>
 
             <button class="btn" ng-click="loadMore()">></button>
