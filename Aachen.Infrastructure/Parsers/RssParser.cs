@@ -30,8 +30,6 @@ namespace Aachen.Infrastructure.Parsers
 					foreach (var result in results)
 						if (!result.ToUpper().Contains(tag.ToUpper()))
 							validResults.Add(result);
-						else
-							_logger.Info(string.Format("Removing joke {0}./n Dangerous tag: {1}", result, tag));
             }
             catch(Exception ex)
             {

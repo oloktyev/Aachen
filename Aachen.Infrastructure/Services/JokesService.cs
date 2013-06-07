@@ -116,8 +116,9 @@ namespace Aachen.Infrastructure.Services
 
         public IList<Joke> AddNewJokes()
         {
+        	var syncObject = new object();
             var newJokes = new List<Joke>();
-			var allResources = _uow.Resources.GetAll().ToList();
+			var allResources = _uow.Resources.GetAll().Where(x => x.Active).ToList();
 			var categories = _uow.Categories.GetAll().ToList();
             var webResources = allResources.Select(x => new 
                 {
@@ -128,16 +129,21 @@ namespace Aachen.Infrastructure.Services
                 });
 
             var lastJokes = _uow.Jokes.GetLatestJokes();
+
             Parallel.ForEach(webResources, webResourse =>
-                {
-                    var lastJoke = lastJokes.FirstOrDefault(x => x.ResourceId == webResourse.ResourseId);
-                	var result = ParserHelper
-                		.ParseResourse(webResourse.TypeId, webResourse.Url)
-                		.ApplyRules(webResourse.Rules.Where(x => x.Active).ToList())
-                		.RemoveOldJokes(lastJoke == null ? null : lastJoke.Description)
-                		.CreateJokes(allResources.First(x => x.Id == webResourse.ResourseId))
-                		.AddCategories(categories);
-                    newJokes.AddRange(result);
+			{
+                var lastJoke = lastJokes.FirstOrDefault(x => x.ResourceId == webResourse.ResourseId);
+                var result = ParserHelper
+                	.ParseResourse(webResourse.TypeId, webResourse.Url).ToList()
+                	.ApplyRules(webResourse.Rules.Where(x => x.Active).ToList())
+                	.RemoveOldJokes(lastJoke == null ? null : lastJoke.Description)
+                	.CreateJokes(allResources.First(x => x.Id == webResourse.ResourseId))
+                	.AddCategories(categories);
+
+				lock (syncObject)
+				{
+					newJokes.AddRange(result);
+				}
             });
 
             if (newJokes.Count > 0)

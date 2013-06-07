@@ -8,6 +8,7 @@
     <title>Лангуст - лучшие анекдоты</title>
 	<meta name="description" content="АkFYUECN - самые смешные анекдоты, новые приколы, истории из жизни, афоризмы и другой юмор.">
 	<meta name="Keywords" content="анекдоты, новые анекдоты, лучшие анекдоты, свежие анекдоты, смешные анекдоты, прикольные анекдоты, анекдоты онлайн, читать анекдоты, смех, юмор, приколы, развлечения">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/aachen/css")      
 </head>
     
@@ -27,7 +28,7 @@
                         <li ng-class="{ active: activePath=='/toprated' }" ><a href="/toprated" title="Лучшие анекдоты">Лучшие</a></li>
                         <li ng-class="{ active: activePath=='/featured' }"><a href="/featured" title="Избранные анекдоты">Избранное</a></li>
                         <li ng-class="{ active: activePath=='/categories' || activePath.indexOf('/bycategory') !== -1}"><a href="/categories" title="Анекдоты по категориям">По категориям</a></li>
-                        <li ng-class="{ active: activePath=='/mobile' }"><a href="/mobile" title="Анекдоты для мобильного">Мобайл</a></li>
+                        <!--<li ng-class="{ active: activePath=='/mobile' }"><a href="/mobile" title="Анекдоты для мобильного">Мобайл</a></li>-->
                         <!--<li ng-class="{ active: activePath=='/add' }"><a href="#add">Добавить</a></li>-->
                     </ul>
                 </div><!--/.nav-collapse -->
