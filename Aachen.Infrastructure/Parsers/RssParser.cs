@@ -26,10 +26,9 @@ namespace Aachen.Infrastructure.Parsers
                     results = descriptionNodes.Select(x => x.InnerText.Trim().Replace(@"<p>", "").Replace(@"</p>", "")).ToList();
                 }
 
-				foreach (var tag in dangerousTags)
-					foreach (var result in results)
-						if (!result.ToUpper().Contains(tag.ToUpper()))
-							validResults.Add(result);
+				foreach (var result in results)
+				    if(!dangerousTags.Any(x => result.ToUpper().Contains(x.ToUpper())))
+						validResults.Add(result);
             }
             catch(Exception ex)
             {
