@@ -43,7 +43,7 @@ namespace Aachen.Infrastructure.EF
             DbContext.Database.ExecuteSqlCommand(
                        @"WITH numbered AS 
                         ( 
-                             SELECT Description, row_number() OVER ( PARTITION BY Description ORDER BY CreatedDate ASC) AS RN 
+                             SELECT Description, row_number() OVER ( PARTITION BY Hash ORDER BY CreatedDate ASC) AS RN 
                              FROM     [Joke]
                         )
                         delete FROM numbered WHERE RN > 1");

@@ -41,12 +41,16 @@ namespace Aachen.Infrastructure.Parsers
             if (jokes == null) 
                 return new List<Joke>();
 
-            return jokes.Where(x => !string.IsNullOrEmpty(x)).Select(x => new Joke
+            var jokeModels = jokes.Where(x => !string.IsNullOrEmpty(x)).Select(x => new Joke
                 {
                     Description = x, 
                     Resource = resource, 
                     CreatedDate = DateTime.Now
                 }).ToList();
+
+            foreach (var joke in jokeModels)
+                joke.Hash = joke.GetHashCode();
+            return jokeModels;
         }
 
 		public static IList<Joke> AddCategories(this IList<Joke> jokes, IList<Category> categories)

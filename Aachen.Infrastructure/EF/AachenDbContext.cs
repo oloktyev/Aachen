@@ -15,6 +15,8 @@ namespace Aachen.Infrastructure.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<AachenDbContext>(null);
+
             // Use singular table names
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 

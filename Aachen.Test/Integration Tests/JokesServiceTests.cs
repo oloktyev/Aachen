@@ -31,26 +31,5 @@ namespace Aachen.Test.Integration_Tests
             var result = _jokesService.GetCategories();
             Assert.IsTrue(result.Count > 0);
         }
-
-        [TestMethod]
-        public void AddNewJokes()
-        {
-            var result = _jokesService.AddNewJokes();
-            Assert.IsTrue(result.Count > 0);
-        }
-
-        [TestMethod]
-        public void FixExistingJokes()
-        {
-            var result = _jokesService.FixExistingJokes();
-            Assert.IsTrue(result.Count > 0);
-        }
-
-        [TestMethod]
-        public void RecalculateCategories()
-        {
-            var result = _jokesService.RecalculateCategories();
-            Assert.IsTrue(result.Count > 0);
-        }
     }
 }
