@@ -166,3 +166,5 @@ logs/
 *.pubxml
 Web.Release.config
 node_modules/
+packages/
+Web.Release.config
